@@ -6,15 +6,11 @@ COMP-3800 (Blockchain) Final Project.
 
 ## Introduction
 
-NoteTogether is an image sharing market platform where users are profit from their posts. The initial project was a social media app that resembled classic moguls, however the implementation as a Dapp allowed changes to the traditional formula. NoteTogether takes advantage of transactional capabilities of Ethereum and treats images as commerce and profit from them. Users select images to post that can be accessed by others for a minimum fee. The image itself is stored on IPFS with its reference hash stored on the blockchain. Using the hash, the image can be rendered easily to view. When a user purchases a post, it can be viewed alongside their original posts via the profile page, which is associated with the given address. Earnings from NoteTogether go directly to the user without a percantage being taken.
+   ...
 
 ## Features
 
-1. Post images for other
-2. Purchase images for viewing
-3. Rate posts to inform other users
-4. Search posts by keyword
-5. Profile to display posts posted and owned
+   ...
 
 ## Getting Started (Ropsten Test Network)
 
@@ -78,9 +74,8 @@ NoteTogether is an image sharing market platform where users are profit from the
 
 ## Demo video
 
-[![Demo Video](https://img.youtube.com/vi/M0d_4ZCgBuI/0.jpg)](https://youtu.be/M0d_4ZCgBuI)
+...
 
 ## Contributors
 
-- Tomas Surna
-- Phil Roesch
+...
