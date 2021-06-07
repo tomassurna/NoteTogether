@@ -1,0 +1,62 @@
+.width-100 {
+  width: 100%;
+}
+
+.profile-info {
+  float: right;
+  padding: 5px;
+  color: rgba(0, 0, 21, 0.5);
+  cursor: pointer;
+}
+
+.contract-book-icon {
+  margin-left: 1vw;
+}
+
+.layout {
+  width: 75vw;
+  margin: auto;
+}
+
+.logo {
+  height: 3.75vh;
+}
+
+.ReactModal__Content {
+  position: unset !important;
+  inset: unset !important;
+  width: 30vw;
+  min-width: 300px;
+  margin: auto;
+  padding: 0 !important;
+  float: right;
+}
+
+.ReactModal__Overlay {
+  display: flex;
+}
+
+.modal-body-btn-right {
+  float: right;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-top: 0.5rem;
+}
+
+.justify-content {
+  text-align: justify;
+}
+
+.ReactModal__Overlay--after-open {
+  z-index: 10;
+}
+
+.version {
+  margin-left: 0.5vw !important;
+}
