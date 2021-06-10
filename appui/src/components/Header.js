@@ -67,8 +67,8 @@ class Header extends React.Component {
           </ul>
           <div className="profile-info">
             <a href="#/pages/profile">
-              <span>
-                {!!window.ethereum ? window.ethereum.selectedAddress : ""} -
+              <span className="userId">
+                {!!window.ethereum ? window.ethereum.selectedAddress : "Guest User"} -
               </span>
               <span>
                 <CIcon content={brandSet.cibEthereum} />
