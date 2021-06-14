@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity >=0.7.0 <0.9.0;
+pragma solidity >=0.5.0 <0.8.0;
+pragma experimental ABIEncoderV2;
 
 /** 
  * @title NoteTogether
@@ -86,18 +87,15 @@ contract NoteTogether {
      * @dev
      * @param user a
      */
-    function getUsername(address user) public returns (string memory username) {
-        return usernameMap[user];
+    function getUsername() public returns (string memory username) {
+        return usernameMap[msg.sender];
     }
     
     /**
      * @dev
      * @param user, username
      */
-    function changeUsername(address user, string memory username) public {
-        usernameMap[user] = username;
+    function changeUsername(string memory username) public {
+        usernameMap[msg.sender] = username;
     }
-     
-     
-    
 }

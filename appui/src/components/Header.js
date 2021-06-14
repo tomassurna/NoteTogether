@@ -42,8 +42,8 @@ class Header extends React.Component {
     return (
       <CHeader withSubheader>
         <CHeaderNav className="px-3 width-100">
-          <a className="c-header-brand" href="//github.com/tomassurna/MyBloc">
-            {/* <img src={MyBlocLogo} alt="[MyBloc Logo]" className="logo" /> */}
+          <a className="c-header-brand" href="//github.com/tomassurna/NoteTogether">
+            {/* <img src={NoteTogetherLogo} alt="[NoteTogether Logo]" className="logo" /> */}
           </a>
           <span className="c-header-toggler">
             <span className="c-header-toggler-icon"></span>
@@ -67,8 +67,8 @@ class Header extends React.Component {
           </ul>
           <div className="profile-info">
             <a href="#/pages/profile">
-              <span>
-                {!!window.ethereum ? window.ethereum.selectedAddress : ""} -
+              <span className="userId">
+                {!!window.ethereum ? window.ethereum.selectedAddress : "Guest User"} -
               </span>
               <span>
                 <CIcon content={brandSet.cibEthereum} />
