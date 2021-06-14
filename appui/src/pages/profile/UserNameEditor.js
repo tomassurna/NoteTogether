@@ -17,9 +17,6 @@ class UserNameEditor extends React.Component {
   }
 
   async applyChanges() {
-
-console.log(this.state.userName)
-
     const transactionParameters = {
       to: noteTogetherAddress,
       from: window.ethereum.selectedAddress,
