@@ -64,6 +64,11 @@ class Header extends React.Component {
                 Profile
               </a>
             </li>
+            <li className="c-header-nav-item">
+              <a className="c-header-nav-link" href="#/pages/videolink">
+                VideoLinkTest
+              </a>
+            </li>
           </ul>
           <div className="profile-info">
             <a href="#/pages/profile">

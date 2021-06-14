@@ -1,0 +1,56 @@
+
+.flex-container-row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.flex-container-column {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flex-container-column .selected {
+    align-self: flex-start;
+    font-size: x-large;
+    font-weight: 750;
+}
+
+.heading {
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.video-player {
+    display: flex;
+    height: 600px;
+    width: 1000px;
+    max-width: 1000px;
+    max-height: 600px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: gray;
+    margin-right: 20px;
+    margin-bottom: 7px;
+}
+
+.notes-section {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.label {
+    font-size: x-large;
+    font-weight: 750;
+}
+
+label + label {
+    margin-left: 10px;
+}
