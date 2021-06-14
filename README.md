@@ -1,6 +1,6 @@
-# BlockChain-FinalProject
+# Capstone
 
-COMP-3800 (Blockchain) Final Project.
+Capstone
 
 # NoteTogether
 
