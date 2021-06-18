@@ -1,4 +1,6 @@
 import './VideoLink.scss';
+import React from 'react';
+import ReactPlayer from 'react-player';
 
 function VideoLink() {
     return (
@@ -6,13 +8,13 @@ function VideoLink() {
             <div className="flex-container-column">
                 <h1 className="heading">Note Together</h1>
             </div>
-            <div className="flex-container-row">
+            <div className="grid">
                 <div className="flex-container-column">
                     <div className="label">
                         Video Title 
                     </div>
-                    <div className="video-player">
-                        Video Player
+                    <div className="video-box">
+                        <ReactPlayer className = "video-player" url='https://www.youtube.com/watch?v=dQw4w9WgXcQ' controls={true}/>
                     </div>
                     <div className="selected">
                         Link Creator:

@@ -5,6 +5,19 @@
     flex-direction: row;
 }
 
+.grid {
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+@media (max-width: 700px) {
+    .videoPage {
+    display:grid;
+    grid-template-columns: 1fr;
+      grid-template-row: 1fr;
+  }
+}
+
 .flex-container-column {
     display: flex;
     align-items: center;
@@ -24,10 +37,10 @@
     margin-bottom: 50px;
 }
 
-.video-player {
+.video-box {
     display: flex;
-    height: 600px;
-    width: 1000px;
+    //height: 600px;
+    width: 100%;
     max-width: 1000px;
     max-height: 600px;
     border: 1px solid black;
@@ -37,11 +50,17 @@
     margin-bottom: 7px;
 }
 
+.video-player {
+    margin: 0 auto;
+}
+
 .notes-section {
     display: flex;
     flex-direction: column;
-    height: 600px;
-    width: 400px;
+    min-height: 361px;
+    height: 361px;
+    overflow: auto;
+    width: 100%;
     border: 1px solid black;
     border-radius: 5px;
 }
