@@ -6,14 +6,14 @@ const Footer = () => {
     <CFooter fixed={false}>
       <div className="mfs-auto">
         <a
-          href="https://github.com/tomassurna/MyBloc"
+          href="https://github.com/tomassurna/NoteTogether"
           target="_blank"
           rel="noopener noreferrer"
         >
-          MyBloc
+          NoteTogether
         </a>
         <span className="ml-1">&copy; 2020</span>
-        <span className="ml-1 version">v7</span>
+        <span className="ml-1 version">v1</span>
       </div>
     </CFooter>
   );

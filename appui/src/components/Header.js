@@ -42,8 +42,8 @@ class Header extends React.Component {
     return (
       <CHeader withSubheader>
         <CHeaderNav className="px-3 width-100">
-          <a className="c-header-brand" href="//github.com/tomassurna/MyBloc">
-            {/* <img src={MyBlocLogo} alt="[MyBloc Logo]" className="logo" /> */}
+          <a className="c-header-brand" href="//github.com/tomassurna/NoteTogether">
+            {/* <img src={NoteTogetherLogo} alt="[NoteTogether Logo]" className="logo" /> */}
           </a>
           <span className="c-header-toggler">
             <span className="c-header-toggler-icon"></span>
