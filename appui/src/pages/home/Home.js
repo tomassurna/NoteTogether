@@ -12,7 +12,7 @@ const ipfs = ipfsClient({
 
 function Home() {
   const [value, setValue] = useState("");
-  const [imageBuffer, setImageBuffer] = useState(null);
+  const [videoBuffer, setVideoBuffer] = useState(null);
 
   const onChange = event => {
     setValue(event.target.value);
@@ -29,8 +29,8 @@ function Home() {
     
 
     reader.onloadend = async function Response(event) {
-      await setImageBuffer(Buffer(reader.result));
-      const results = await ipfs.add(imageBuffer);
+      await setVideoBuffer(Buffer(reader.result));
+      const results = await ipfs.add(videoBuffer);
     }
 
   }
