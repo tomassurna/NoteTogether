@@ -1,9 +1,40 @@
 import './Home.scss'
 import UploadImage from '../../assets/upload.svg'
-import React from 'react'
+import React, {useState} from 'react'
+
+const ipfsClient = require("ipfs-http-client");
+const ipfs = ipfsClient({
+  host: "ipfs.infuria.io",
+  port: 5001,
+  protocol: "https",
+});
 
 
 function Home() {
+  const [value, setValue] = useState("");
+  const [videoBuffer, setVideoBuffer] = useState(null);
+
+  const onChange = event => {
+    setValue(event.target.value);
+  }
+
+
+  function LoadFile(event) {
+    event.preventDefault();
+
+    const file = event.target.files[0];
+    const reader = new window.FileReader();
+
+    reader.readAsArrayBuffer(file);
+    
+
+    reader.onloadend = async function Response(event) {
+      await setVideoBuffer(Buffer(reader.result));
+      const results = await ipfs.add(videoBuffer);
+    }
+
+  }
+
   return (
     <div id="home" className="flex-container">
       <h1 className="heading">Note Together</h1>
@@ -26,9 +57,11 @@ function Home() {
         <img
           className="upload-icon"
           src={UploadImage}
+          alt="Upload-Icon"
           width="53.90"
           height="71.87"
         ></img>
+        <input type="file" id="vid-file" onChange={LoadFile}></input>
         <input
           className="link-radio"
           type="radio"
@@ -48,4 +81,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Home;
