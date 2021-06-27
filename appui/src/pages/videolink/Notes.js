@@ -2,12 +2,11 @@ import React from 'react'
 import { useState } from 'react';
 import Player from './Player';
 
-export default function Notes() {
+export default function Notes({videoRef}) {
 
+    console.log(videoRef)
     // Message State
     const [messages, setMessages] = useState([]);
-    const username = "Username";
-    const timestamp = "0:00:00";
 
     return (
         <div className="flex-container-column">
@@ -16,15 +15,19 @@ export default function Notes() {
             </div>
             <div className="notes-section">
         
-                {messages.map(item => <div> {username} {item} {timestamp} </div>)}
+                {messages.map((item,index) => <div key={index}> {item.user} {item.message} {item.time} </div>)}
 
             </div>
             <form className="flex-container-row" style={{width:"100%"}} onSubmit={(e)=> {
-                    setMessages([...messages, document.getElementById("note").value])
+                    setMessages([...messages, {
+                        message:document.getElementById("note").value,
+                        user:"username",
+                        time: new Date(videoRef.current.getCurrentTime()*1000).toISOString().substr(11,8)}
+                    ])
                     e.preventDefault()
                     document.getElementById("note").value=""
                 }}>
-                <input className="typing-area" type="text" id="note" placeholder='Enter Note Here' />
+                <input className="typing-area" type="text" id="note" autoComplete="off" placeholder='Enter Note Here' />
                 <input type="submit" value="Enter" />
             </form>
             <div className="label"> 
