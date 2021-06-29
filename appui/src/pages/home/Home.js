@@ -1,84 +1,139 @@
 import './Home.scss'
 import UploadImage from '../../assets/upload.svg'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { noteTogetherAddress, noteTogetherContract, web3 } from '../../config'
+import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
 
-const ipfsClient = require("ipfs-http-client");
+const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({
-  host: "ipfs.infuria.io",
+  host: 'ipfs.infura.io',
   port: 5001,
-  protocol: "https",
-});
+  protocol: 'https',
+})
 
+class Home extends React.Component {
+  constructor(props) {
+    super(props)
 
-function Home() {
-  const [value, setValue] = useState("");
-  const [videoBuffer, setVideoBuffer] = useState(null);
-
-  const onChange = event => {
-    setValue(event.target.value);
+    this.state = {
+      videoUrl: null,
+      videoBuffer: null,
+    }
   }
 
+  loadFile = (event) => {
+    event.preventDefault()
 
-  function LoadFile(event) {
-    event.preventDefault();
-
-    const file = event.target.files[0];
-    const reader = new window.FileReader();
-
-    reader.readAsArrayBuffer(file);
-    
+    const file = event.target.files[0]
+    const reader = new window.FileReader()
 
     reader.onloadend = async function Response(event) {
-      await setVideoBuffer(Buffer(reader.result));
-      const results = await ipfs.add(videoBuffer);
+      this.setState({ videoBuffer: Buffer(event.target.result) })
     }
 
+    reader.readAsArrayBuffer(file)
   }
 
-  return (
-    <div id="home" className="flex-container">
-      <h1 className="heading">Note Together</h1>
-      <h2 className="instructions">
-        Upload your own video to enter a Youtube video link!
-      </h2>
-      <div className="video-section">
-        <input
-          className="youtube-link"
-          placeholder="Put Youtube Link here"
-        ></input>
-        <input
-          className="link-radio"
-          type="radio"
-          name="video-source"
-          value="1"
-          checked
-        ></input>
-        <h1 className="or-text">OR</h1>
-        <img
-          className="upload-icon"
-          src={UploadImage}
-          alt="Upload-Icon"
-          width="53.90"
-          height="71.87"
-        ></img>
-        <input type="file" id="vid-file" onChange={LoadFile}></input>
-        <input
-          className="link-radio"
-          type="radio"
-          name="video-source"
-          value="2"
-        ></input>
-      </div>
-      <h2 className="instructions">Enter a title and upload!</h2>
-      <div className="title-section">
-        <input
-          className="video-title"
-          placeholder="Enter Video Title here"
-        ></input>
-        <button className="upload-button">Upload</button>
-      </div>
-    </div>
-  )
+  async upload() {
+    let results
+
+    if (this.state.videoUrl != null) {
+      results = await ipfs.add(Buffer(this.state.videoUrl))
+    } else {
+      results = await ipfs.add(this.state.videoBuffer)
+    }
+
+    const { hash } = results[0]
+
+    console.log(hash)
+
+    const transactionParameters = {
+      to: noteTogetherAddress,
+      from: window.ethereum.selectedAddress,
+      data: noteTogetherContract.methods.addVideo('t', 't').encodeABI(),
+    }
+
+    const txHash = await window.ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [transactionParameters],
+    })
+
+    // Hack to wait for transaction to be mined before redirecting page
+    let loop = true
+    while (loop) {
+      const transaction = await web3.eth.getTransactionReceipt(txHash)
+
+      if (!transaction.status) {
+        await new Promise((resolve) => setTimeout(resolve, 6000))
+      } else {
+        loop = false
+      }
+    }
+
+    this.props.history.push('/pages/videoLink/' + hash)
+  }
+  render() {
+    return (
+      <>
+        <CCard>
+          <CCardHeader>
+            <h3 className="display-inline">Upload Video</h3>
+            <br></br>
+            <p className="display-inline">
+              Upload your own video to enter a Youtube video link!
+            </p>
+          </CCardHeader>
+        </CCard>
+        <CCard>
+          <CCardBody>
+            <div>
+              <label htmlFor="videoTitle">
+                Video Title
+                <input
+                  className="form-control"
+                  id="videoTitle"
+                  placeholder="Enter Video Title here"
+                />
+              </label>
+            </div>
+            <br />
+            <div className="video-section">
+              <label htmlFor="videoLink">
+                Video Link
+                <input
+                  id="videoLink"
+                  className="form-control container"
+                  placeholder="Put Youtube Link here"
+                  onChange={(event) =>
+                    this.setState({ videoUrl: event.target.value })
+                  }
+                />
+              </label>
+              <h1 className="or-text">OR</h1>
+
+              <label htmlFor="vidFile">
+                <input
+                  type="file"
+                  className="form-control container"
+                  id="vidFile"
+                  onChange={this.loadFile}
+                ></input>
+              </label>
+            </div>
+            <div className="float-right">
+              <CButton
+                color="success"
+                className="height-25-rem"
+                onClick={this.upload.bind(this)}
+              >
+                Upload
+              </CButton>
+            </div>
+          </CCardBody>
+        </CCard>
+      </>
+    )
+  }
 }
 
-export default Home;
+export default Home
