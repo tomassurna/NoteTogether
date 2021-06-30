@@ -1,19 +1,35 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
+import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
+import './VideoLink.scss'
 
-export default function Player ({name, url, creator, videoRef}) {
+class Player extends React.Component {
+  constructor(props) {
+    super(props)
 
+    console.log(props)
+
+    this.state = {
+      name: props.name,
+      videoRef: props.videoRef,
+      url: props.url,
+      creator: props.creator,
+    }
+  }
+
+  render() {
     return (
-        <div className="flex-container-column">
-            <div className="label">
-                {name}
-            </div>
-            <div className="video-box">
-                <ReactPlayer className="video-player"  ref={videoRef} url={url} controls={true}/>
-            </div>
-            <div className="selected">
-                {creator}
-            </div>
-        </div>
-        ) 
+      <>
+        <ReactPlayer
+          width="100%"
+          height="100%"
+          ref={this.state.videoRef}
+          url={this.state.url}
+          controls={true}
+        />
+      </>
+    )
+  }
 }
+
+export default Player

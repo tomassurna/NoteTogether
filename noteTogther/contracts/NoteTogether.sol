@@ -12,7 +12,7 @@ contract NoteTogether {
    
     struct Video {
         string IPFSkey; //hash key for retrieving video from IPFS directory
-        string pageLink; //sharable link that is used to access video metadata
+        string title; //sharable link that is used to access video metadata
         address user; //video uploader
     }
 
@@ -28,34 +28,26 @@ contract NoteTogether {
         string noteData; //analytics metadata for note taking
     }
     
-    
-    
-    
     mapping(string => Video) videoMap; //map of videos to their id by page link
     
     mapping(string => Note[]) noteMap; //map of note lists to video id
     
-    mapping(string => Analytics) analyticsMap; //map of view analytics to video via pageLink
+    mapping(string => Analytics) analyticsMap; //map of view analytics to video via key
     
     mapping(address => string) usernameMap; //map of user addresses to usernames
     
-    
-    
     /** 
      * @dev creates video metadata storage with an IPFS key and the page link
-     * @param key, pageLink
+     * @param key, key
      */
-    function addVideo(string memory key, string memory pageLink) public returns (string memory link) {
-        
-        Video memory vid = Video(key, pageLink, msg.sender);
-        videoMap[pageLink] = vid;
-        
-        
+    function addVideo(string memory key, string memory title) public {
+        Video memory vid = Video(key, title, msg.sender);
+        videoMap[key] = vid;
     }
     
     /**
      * @dev pulls Video metadata of a corresponding page link
-     * @param link pagelink
+     * @param link key
      */
     function getVideoData(string memory link) public returns ( Video memory video) {
         return videoMap[link];
@@ -63,11 +55,11 @@ contract NoteTogether {
     
     /**
      * @dev stores a note for a video 
-     * @param pageLink, timestamp, tag, content, user
+     * @param key, timestamp, tag, content, user
      */
-    function addNote(string memory pageLink, string memory timestamp, string memory tag, string memory content) public {
+    function addNote(string memory key, string memory timestamp, string memory tag, string memory content) public {
         Note memory note = Note(timestamp, tag, content, msg.sender);
-        noteMap[pageLink].push(note);
+        noteMap[key].push(note);
     }
     
     /**
