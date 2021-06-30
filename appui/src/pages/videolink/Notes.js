@@ -23,6 +23,7 @@ class Notes extends React.Component {
       userName: props.userName,
       static: true,
       videoId: props.videoId,
+      selectedTag: "Note"
     }
   }
 
@@ -31,6 +32,7 @@ class Notes extends React.Component {
       .toISOString()
       .substr(11, 8)
     const message = document.getElementById('note').value
+    const tag = this.state.selectedTag
 
     this.setState({
       messages: [
@@ -39,6 +41,7 @@ class Notes extends React.Component {
           message: message,
           user: this.state.userName || 'Guest User',
           time: time,
+          tag: tag
         },
       ],
     })
@@ -102,6 +105,7 @@ class Notes extends React.Component {
                 name={item.user}
                 message={item.message}
                 timestamp={item.time}
+                tag={item.tag}
               />
             ))}
           </CCardBody>
@@ -120,6 +124,35 @@ class Notes extends React.Component {
           />
           <input class="btn btn-dark notes-btn" type="submit" value="Enter" />
         </form>
+        <div className="notes-radio">
+          <label>
+            <input
+              type="radio"
+              name="tag-type"
+              checked={this.state.selectedTag === "Question"}
+              onClick={() =>this.setState({...this.state,selectedTag: "Question"})}
+            />{' '}
+            Question
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="tag-type"
+              checked={this.state.selectedTag === "Note"}
+              onClick={() =>this.setState({...this.state,selectedTag: "Note"})}
+            />{' '}
+            Note
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="tag-type"
+              checked={this.state.selectedTag === "Answer"}
+              onClick={() =>this.setState({...this.state,selectedTag: "Answer"})}
+            />{' '}
+            Answer
+          </label>
+        </div>
         <div className="notes-radio">
           <label>
             <input
