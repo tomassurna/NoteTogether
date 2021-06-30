@@ -18,6 +18,7 @@ class Home extends React.Component {
     this.state = {
       videoUrl: null,
       videoBuffer: null,
+      title: null,
     }
   }
 
@@ -45,12 +46,12 @@ class Home extends React.Component {
 
     const { hash } = results[0]
 
-    console.log(hash)
-
     const transactionParameters = {
       to: noteTogetherAddress,
       from: window.ethereum.selectedAddress,
-      data: noteTogetherContract.methods.addVideo('t', 't').encodeABI(),
+      data: noteTogetherContract.methods
+        .addVideo(hash, this.state.title)
+        .encodeABI(),
     }
 
     const txHash = await window.ethereum.request({
@@ -72,6 +73,13 @@ class Home extends React.Component {
 
     this.props.history.push('/pages/videoLink/' + hash)
   }
+
+  canUpload() {
+    return (
+      (!!this.state.videoBuffer || !!this.state.videoUrl) && !!this.state.title
+    )
+  }
+
   render() {
     return (
       <>
@@ -93,6 +101,9 @@ class Home extends React.Component {
                   className="form-control"
                   id="videoTitle"
                   placeholder="Enter Video Title here"
+                  onChange={(event) =>
+                    this.setState({ title: event.target.value })
+                  }
                 />
               </label>
             </div>
@@ -124,6 +135,10 @@ class Home extends React.Component {
               <CButton
                 color="success"
                 className="height-25-rem"
+                disabled={
+                  (!this.state.videoBuffer || !this.state.videoUrl) &&
+                  !this.state.title
+                }
                 onClick={this.upload.bind(this)}
               >
                 Upload
