@@ -6,6 +6,10 @@ import { useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
 import { noteTogetherContract, web3 } from '../../config'
+import { createStore } from 'redux'
+import playerTimeReducer from '../../redux/PlayerTimeReducer'
+
+const store = createStore(playerTimeReducer)
 
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({
@@ -21,27 +25,32 @@ function VideoLink() {
   const [title, setTitle] = useState('')
   const [userName, setUserName] = useState('')
   const [loading, setLoading] = useState(true)
+  const [invalidLink, setInvalidLink] = useState(false)
 
   // Time being just assume video links are being used
   useEffect(() => {
     async function getUrlInfo() {
       if (!!videoId) {
-        const videoUrl = await ipfs.get(videoId)
-        setUrl(videoUrl[0]?.content?.toString())
+        try {
+          const videoUrl = await ipfs.get(videoId)
+          setUrl(videoUrl[0]?.content?.toString())
 
-        const userNameData = await noteTogetherContract.methods
-          .getUsername()
-          .call()
-        setUserName(userNameData)
+          const userNameData = await noteTogetherContract.methods
+            .getUsernameById(window.ethereum.selectedAddress)
+            .call()
+          setUserName(userNameData)
 
-        const videoData = await noteTogetherContract.methods
-          .getVideoData(videoId)
-          .call()
+          const videoData = await noteTogetherContract.methods
+            .getVideoData(videoId)
+            .call()
 
-        console.log(videoData)
+          console.log(videoData)
 
-        setTitle(videoData?.title)
-        setLoading(false)
+          setTitle(videoData?.title)
+          setLoading(false)
+        } catch (e) {
+          setInvalidLink(true)
+        }
       }
     }
 
@@ -50,7 +59,7 @@ function VideoLink() {
 
   return (
     <>
-      {!loading && (
+      {!invalidLink && !loading && (
         <div className="video-container">
           <CCard style={{ flexGrow: '1' }}>
             <CCardBody>
@@ -61,6 +70,7 @@ function VideoLink() {
                     url={url}
                     creator="Link Creator"
                     videoRef={videoRef}
+                    store={store}
                   />
                 </div>
               </div>
@@ -73,16 +83,25 @@ function VideoLink() {
                 videoRef={videoRef}
                 userName={userName}
                 videoId={videoId}
+                store={store}
               />
             </CCardBody>
           </CCard>
         </div>
       )}
 
-      {loading && (
+      {!invalidLink && loading && (
         <div>
           <CCard>
             <CCardHeader>Loading...</CCardHeader>
+          </CCard>
+        </div>
+      )}
+
+      {invalidLink && loading && (
+        <div>
+          <CCard>
+            <CCardHeader>Invalid Link</CCardHeader>
           </CCard>
         </div>
       )}

@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 class Message extends React.Component {
   constructor(props) {
     super(props)
-
-    console.log(props)
   }
 
   render() {
