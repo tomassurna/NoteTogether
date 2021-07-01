@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 
-const serverAcountId = "0x9B276CC3298bf302473788Cc35e9A2708A4c40A7"
-const noteTogetherAddress = '0x6dDb651FE2703942aAE5C9EEeB426B256B90303E'
+const serverAcountId = "0x8F3c859cb920Ad5256db6Be4ED937c6442c56d01"
+const noteTogetherAddress = '0x9B479BbcB885D03048364A3D78FFe666b6C97D30'
 const projectId = '831be8f97ba94cc69df353bf84a9c574'
 const noteTogetherAbi = [
   {
@@ -82,8 +82,13 @@ const noteTogetherAbi = [
       },
       {
         "internalType": "string",
-        "name": "content",
+        "name": "message",
         "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
       }
     ],
     "name": "addNote",
@@ -117,7 +122,7 @@ const noteTogetherAbi = [
           },
           {
             "internalType": "string",
-            "name": "content",
+            "name": "message",
             "type": "string"
           },
           {
@@ -164,6 +169,27 @@ const noteTogetherAbi = [
     "constant": false,
     "inputs": [],
     "name": "getUsername",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "username",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getUsernameById",
     "outputs": [
       {
         "internalType": "string",
