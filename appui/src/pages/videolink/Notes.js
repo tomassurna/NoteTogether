@@ -27,6 +27,7 @@ class Notes extends React.Component {
       userName: props.userName,
       static: true,
       videoId: props.videoId,
+      selectedTag: 'Note',
       loading: true,
     }
 
@@ -91,6 +92,7 @@ class Notes extends React.Component {
       .toISOString()
       .substr(11, 8)
     const message = document.getElementById('note').value
+    const tag = this.state.selectedTag
 
     this.setState({
       messages: [
@@ -98,6 +100,8 @@ class Notes extends React.Component {
         {
           message: message,
           userName: this.state.userName || 'Guest User',
+          time: time,
+          tag: tag,
           timestamp: time,
           timestampInSeconds: this.getSeconds(time),
         },
@@ -152,6 +156,7 @@ class Notes extends React.Component {
                         name={item.userName}
                         message={item.message}
                         timestamp={item.timestamp}
+                        tag={item.tag}
                       />
                     ))
                   : this.state.dynamicMessages.map((item, index) => (
@@ -160,6 +165,7 @@ class Notes extends React.Component {
                         name={item.userName}
                         message={item.message}
                         timestamp={item.timestamp}
+                        tag={item.tag}
                       />
                     ))}
                 <div
@@ -188,6 +194,41 @@ class Notes extends React.Component {
                 value="Enter"
               />
             </form>
+            <div className="notes-radio">
+              <label>
+                <input
+                  type="radio"
+                  name="tag-type"
+                  checked={this.state.selectedTag === 'Question'}
+                  onClick={() =>
+                    this.setState({ ...this.state, selectedTag: 'Question' })
+                  }
+                />{' '}
+                Question
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="tag-type"
+                  checked={this.state.selectedTag === 'Note'}
+                  onClick={() =>
+                    this.setState({ ...this.state, selectedTag: 'Note' })
+                  }
+                />{' '}
+                Note
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="tag-type"
+                  checked={this.state.selectedTag === 'Answer'}
+                  onClick={() =>
+                    this.setState({ ...this.state, selectedTag: 'Answer' })
+                  }
+                />{' '}
+                Answer
+              </label>
+            </div>
             <div className="notes-radio">
               <label>
                 <input
