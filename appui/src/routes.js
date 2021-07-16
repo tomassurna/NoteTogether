@@ -4,6 +4,7 @@ import React from "react";
 const Home = React.lazy(() => import("./pages/home/Home.js"));
 const VideoLink = React.lazy(() => import("./pages/videolink/VideoLink.js"));
 const Profile = React.lazy(() => import("./pages/profile/Profile.js"));
+const About = React.lazy(() => import("./pages/about/About.js"));
 
 // set path for every page
 const routes = [
@@ -11,6 +12,7 @@ const routes = [
   { path: "/pages/home", name: "Home", component: Home },
   { path: "/pages/videolink/:videoId", name: "VideoLink", component: VideoLink },
   { path: "/pages/profile", name: "Profile", component: Profile },
+  { path: "/pages/aboutUs", name: "About", component: About}
 ];
 
 export default routes;
