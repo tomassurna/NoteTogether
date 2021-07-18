@@ -59,52 +59,59 @@ function VideoLink() {
 
   return (
     <>
-      {!invalidLink && !loading && (
-        <div className="video-container">
-          <CCard style={{ flexGrow: '1' }}>
-            <CCardBody>
-              <div className="aspect-ratio-box">
-                <div className="aspect-ratio-box-inside">
-                  <Player
-                    name={title}
-                    url={url}
-                    creator="Link Creator"
+      <div>
+        {!invalidLink && !loading && (
+          <>
+            <div className="video-container">
+              <CCard style={{ flexGrow: '1' }}>
+                <CCardHeader>
+                  <h3>{title}</h3>
+                </CCardHeader>
+                <CCardBody>
+                  <div className="aspect-ratio-box">
+                    <div className="aspect-ratio-box-inside">
+                      <Player
+                        name={title}
+                        url={url}
+                        creator="Link Creator"
+                        videoRef={videoRef}
+                        store={store}
+                      />
+                    </div>
+                  </div>
+                </CCardBody>
+              </CCard>
+
+              <CCard className="video-notes">
+                <CCardBody>
+                  <Notes
                     videoRef={videoRef}
+                    userName={userName}
+                    videoId={videoId}
                     store={store}
                   />
-                </div>
-              </div>
-            </CCardBody>
-          </CCard>
+                </CCardBody>
+              </CCard>
+            </div>
+          </>
+        )}
 
-          <CCard className="video-notes">
-            <CCardBody>
-              <Notes
-                videoRef={videoRef}
-                userName={userName}
-                videoId={videoId}
-                store={store}
-              />
-            </CCardBody>
-          </CCard>
-        </div>
-      )}
+        {!invalidLink && loading && (
+          <div>
+            <CCard>
+              <CCardHeader>Loading...</CCardHeader>
+            </CCard>
+          </div>
+        )}
 
-      {!invalidLink && loading && (
-        <div>
-          <CCard>
-            <CCardHeader>Loading...</CCardHeader>
-          </CCard>
-        </div>
-      )}
-
-      {invalidLink && loading && (
-        <div>
-          <CCard>
-            <CCardHeader>Invalid Link</CCardHeader>
-          </CCard>
-        </div>
-      )}
+        {invalidLink && loading && (
+          <div>
+            <CCard>
+              <CCardHeader>Invalid Link</CCardHeader>
+            </CCard>
+          </div>
+        )}
+      </div>
     </>
   )
 }

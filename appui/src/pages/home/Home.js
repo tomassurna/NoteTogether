@@ -1,8 +1,7 @@
-import './Home.scss'
-import UploadImage from '../../assets/upload.svg'
-import React, { useState } from 'react'
+import { CButton, CCard, CCardBody } from '@coreui/react'
+import React from 'react'
 import { noteTogetherAddress, noteTogetherContract, web3 } from '../../config'
-import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
+import './Home.scss'
 
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({
@@ -83,69 +82,86 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <CCard>
-          <CCardHeader>
-            <h3 className="display-inline">Upload Video</h3>
-            <br></br>
-            <p className="display-inline">
-              Upload your own video to enter a Youtube video link!
-            </p>
-          </CCardHeader>
-        </CCard>
-        <CCard>
-          <CCardBody>
-            <div>
-              <label htmlFor="videoTitle">
-                Video Title
-                <input
-                  className="form-control"
-                  id="videoTitle"
-                  placeholder="Enter Video Title here"
-                  onChange={(event) =>
-                    this.setState({ title: event.target.value })
+        <div className="card-container">
+          <CCard style={{ width: '50%' }}>
+            <CCardBody>
+              <div style={{ textAlign: 'center', flexGrow: 1 }}>
+                <span
+                  className="display-inline"
+                  style={{ fontSize: '3rem', color: 'blue' }}
+                >
+                  Note Together
+                </span>
+                <br></br>
+                <p className="display-inline">
+                  Upload using a Youtube Link or your own Video File! Then add a
+                  title!
+                </p>
+              </div>
+              <div className="form-container">
+                <div className="video-section">
+                  <label
+                    htmlFor="videoTitle"
+                    className="label-text"
+                    style={{ width: '80%' }}
+                  >
+                    Video Title
+                    <input
+                      className="form-control"
+                      id="videoTitle"
+                      placeholder="Enter Video Title here"
+                      onChange={(event) =>
+                        this.setState({ title: event.target.value })
+                      }
+                    />
+                  </label>
+                  <label
+                    htmlFor="videoLink"
+                    className="label-text input-container"
+                    style={{ maxWidth: '80%' }}
+                  >
+                    Video Link
+                    <input
+                      id="videoLink"
+                      className="form-control"
+                      placeholder="Put Youtube Link here"
+                      onChange={(event) =>
+                        this.setState({ videoUrl: event.target.value })
+                      }
+                    />
+                  </label>
+                  <h3 style={{ fontWeight: 600, marginTop: '4%' }}>OR</h3>
+                  <label
+                    htmlFor="vidFile"
+                    className="label-text input-container"
+                    style={{ maxWidth: '80%' }}
+                  >
+                    Video File
+                    <input
+                      type="file"
+                      className="form-control"
+                      id="vidFile"
+                      onChange={this.loadFile}
+                    ></input>
+                  </label>
+                </div>
+              </div>
+              <div className="float-right" style={{ marginTop: '5%' }}>
+                <CButton
+                  color="success"
+                  className="height-25-rem btn-lg"
+                  disabled={
+                    (!this.state.videoBuffer || !this.state.videoUrl) &&
+                    !this.state.title
                   }
-                />
-              </label>
-            </div>
-            <br />
-            <div className="video-section">
-              <label htmlFor="videoLink">
-                Video Link
-                <input
-                  id="videoLink"
-                  className="form-control container"
-                  placeholder="Put Youtube Link here"
-                  onChange={(event) =>
-                    this.setState({ videoUrl: event.target.value })
-                  }
-                />
-              </label>
-              <h1 className="or-text">OR</h1>
-
-              <label htmlFor="vidFile">
-                <input
-                  type="file"
-                  className="form-control container"
-                  id="vidFile"
-                  onChange={this.loadFile}
-                ></input>
-              </label>
-            </div>
-            <div className="float-right">
-              <CButton
-                color="success"
-                className="height-25-rem"
-                disabled={
-                  (!this.state.videoBuffer || !this.state.videoUrl) &&
-                  !this.state.title
-                }
-                onClick={this.upload.bind(this)}
-              >
-                Upload
-              </CButton>
-            </div>
-          </CCardBody>
-        </CCard>
+                  onClick={this.upload.bind(this)}
+                >
+                  Upload
+                </CButton>
+              </div>
+            </CCardBody>
+          </CCard>
+        </div>
       </>
     )
   }
