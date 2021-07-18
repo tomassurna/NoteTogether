@@ -1,14 +1,14 @@
 import { noteTogetherAddress, noteTogetherContract, web3 } from '../../config'
 import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
 import React from 'react'
+import './Profile.scss'
 
 class UserNameEditor extends React.Component {
-
   constructor(props) {
     super(props)
 
     this.state = {
-      userName: "",
+      userName: '',
     }
   }
 
@@ -30,7 +30,8 @@ class UserNameEditor extends React.Component {
       params: [transactionParameters],
     })
 
-    await web3.eth.getTransaction(txHash)
+    await web3.eth.getTransactionReceipt(txHash);
+    window.location.reload();
   }
 
   render() {
@@ -42,14 +43,15 @@ class UserNameEditor extends React.Component {
           </CCardHeader>
           <CCardBody>
             <input
-              className="input"
+              className="form-control display-inline"
               placeholder="Change Username"
               value={this.state.userName}
               onChange={this.onChange.bind(this)}
             ></input>
             <CButton
+              style={{ marginTop: '3%' }}
               color="success"
-              className="height-25-rem"
+              className="height-25-rem float-right"
               onClick={this.applyChanges.bind(this)}
             >
               Apply Changes

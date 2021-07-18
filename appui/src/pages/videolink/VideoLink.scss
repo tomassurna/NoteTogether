@@ -1,75 +1,169 @@
+.layout {
+  width: 100vw;
+  margin: auto;
+}
 
 .flex-container-row {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-}
-
-.grid {
-    display:grid;
-    grid-template-columns: 2fr 1fr;
-}
-
-@media (max-width: 700px) {
-    .videoPage {
-    display:grid;
-    grid-template-columns: 1fr;
-      grid-template-row: 1fr;
-  }
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 .flex-container-column {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
 }
 
 .flex-container-column .selected {
-    align-self: flex-start;
-    font-size: x-large;
-    font-weight: 750;
+  align-self: flex-start;
+  font-size: x-large;
+  font-weight: 750;
 }
 
 .heading {
-    justify-content: center;
-    align-self: center;
-    align-items: center;
-    margin-bottom: 50px;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  margin-bottom: 50px;
 }
 
 .video-box {
-    display: flex;
-    //height: 600px;
-    width: 100%;
-    max-width: 1000px;
-    max-height: 600px;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: gray;
-    margin-right: 20px;
-    margin-bottom: 7px;
+  display: flex;
+  //height: 600px;
+  // width: 100%;
+  // max-width: 1000px;
+  // max-height: 600px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: gray;
+  margin-right: 20px;
+  margin-bottom: 7px;
 }
 
-.video-player {
-    margin: 0 auto;
+.video-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+// .video-player {
+//   flex-grow: 1;
+// //   margin: 1%;
+// //   height: 85vh;
+//   display: block;
+//   width: 100vw;
+//   max-width: 100%;
+// //   max-width: 177.78vh;
+//   /* 16/9 = 1.778 */
+//   height: 56.25vw;
+//   /* height:width ratio = 9/16 = .5625  */
+//   max-height: 100%;
+//   background-color: black;
+// }
+
+.aspect-ratio-box {
+  height: 0;
+  overflow: hidden;
+  padding-top: 591.44px / 1127.34px * 100%;
+  background: white;
+  position: relative;
+}
+
+.aspect-ratio-box-inside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.flexbox-centering {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewport-sizing {
+  font-size: 5vw;
+}
+
+.video-notes {
+  margin-left: 1%;
+  width: 25%;
+  max-width: 400px;
+}
+
+.player-wrapper {
+  width: auto; // Reset width
+  height: auto; // Reset height
+}
+.react-player {
+  padding-top: 56.25%; // Percentage ratio for 16:9
+  position: relative; // Set to relative
+}
+.message {
+  margin: 1%;
+}
+.react-player > div {
+  position: absolute; // Scaling will occur since parent is relative now
+}
+
+.react-player {
+  padding-top: 56.25%; // Percentage ratio for 16:9
+  position: relative; // Set to relative
+}
+
+.react-player > div {
+  position: absolute; // Scaling will occur since parent is relative now
+}
+
+.notes-btn {
+  margin-left: 1%;
 }
 
 .notes-section {
-    display: flex;
-    flex-direction: column;
-    min-height: 361px;
-    height: 361px;
-    overflow: auto;
-    width: 100%;
-    border: 1px solid black;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  min-height: 361px;
+  height: 361px;
+  overflow: auto;
+  width: 100%;
+  flex-grow: 1;
+  margin: 5%;
+  margin-top: 0;
+}
+.notes-section-body {
+  padding: 0.25rem;
+}
+
+.message-name {
+  font-weight: 700;
+}
+
+.note-title {
+  font-size: large;
+}
+
+.notes-radio {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-top: 3%;
+  display: flex;
+  width: 100%;
+}
+
+.typing-area {
+  width: 100%;
 }
 
 .label {
-    font-size: x-large;
-    font-weight: 750;
+  font-size: x-large;
+  font-weight: 750;
 }
 
 label + label {
-    margin-left: 10px;
+  margin-left: 10px;
 }

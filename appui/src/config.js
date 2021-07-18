@@ -1,6 +1,7 @@
 import Web3 from 'web3'
 
-const noteTogetherAddress = '0x6ee7848f59dCf4aA7F1568e943832f8f3632C0D2'
+const serverAcountId = "0x7A5f4c5D9e49AA5a6A2432B8F99375cAf344c99c"
+const noteTogetherAddress = '0x6c71495af3083a22c66f57123edfc1a3907b72b7'
 const projectId = '831be8f97ba94cc69df353bf84a9c574'
 const noteTogetherAbi = [
   {
@@ -13,18 +14,12 @@ const noteTogetherAbi = [
       },
       {
         "internalType": "string",
-        "name": "pageLink",
+        "name": "title",
         "type": "string"
       }
     ],
     "name": "addVideo",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "link",
-        "type": "string"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -49,8 +44,13 @@ const noteTogetherAbi = [
           },
           {
             "internalType": "string",
-            "name": "pageLink",
+            "name": "title",
             "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
           }
         ],
         "internalType": "struct NoteTogether.Video",
@@ -67,7 +67,7 @@ const noteTogetherAbi = [
     "inputs": [
       {
         "internalType": "string",
-        "name": "pageLink",
+        "name": "key",
         "type": "string"
       },
       {
@@ -82,25 +82,13 @@ const noteTogetherAbi = [
       },
       {
         "internalType": "string",
-        "name": "content",
+        "name": "message",
         "type": "string"
       },
       {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "userAdr",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "username",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct NoteTogether.User",
+        "internalType": "address",
         "name": "user",
-        "type": "tuple"
+        "type": "address"
       }
     ],
     "name": "addNote",
@@ -134,25 +122,13 @@ const noteTogetherAbi = [
           },
           {
             "internalType": "string",
-            "name": "content",
+            "name": "message",
             "type": "string"
           },
           {
-            "components": [
-              {
-                "internalType": "address",
-                "name": "userAdr",
-                "type": "address"
-              },
-              {
-                "internalType": "string",
-                "name": "username",
-                "type": "string"
-              }
-            ],
-            "internalType": "struct NoteTogether.User",
+            "internalType": "address",
             "name": "user",
-            "type": "tuple"
+            "type": "address"
           }
         ],
         "internalType": "struct NoteTogether.Note[]",
@@ -174,11 +150,16 @@ const noteTogetherAbi = [
       },
       {
         "internalType": "string",
+        "name": "noteData",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
         "name": "viewData",
         "type": "string"
       }
     ],
-    "name": "addViewData",
+    "name": "updateAnalytics",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -188,6 +169,27 @@ const noteTogetherAbi = [
     "constant": false,
     "inputs": [],
     "name": "getUsername",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "username",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getUsernameById",
     "outputs": [
       {
         "internalType": "string",
@@ -227,4 +229,4 @@ const noteTogetherContract = new web3.eth.Contract(
   noteTogetherAddress,
 )
 
-export { web3, noteTogetherContract, noteTogetherAddress }
+export { web3, noteTogetherContract, noteTogetherAddress, serverAcountId }
