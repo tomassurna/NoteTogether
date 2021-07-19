@@ -4,6 +4,7 @@ import Player from './Player'
 import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
 import './VideoLink.scss'
 import Message from './Message'
+import axios from 'axios';
 import {
   noteTogetherAddress,
   noteTogetherContract,
@@ -127,7 +128,18 @@ class Notes extends React.Component {
         from: serverAcountId,
         gas: 6700000,
       })
+
+      const note_analytic = {
+        video: this.state.videoId,
+        timestamp: time,
+        tag: tag,
+      };
+
+      axios
+      .post("http://localhost:3000/note_analytics/add", note_analytic)
+      .then((res) => console.log(res.data));
     this.scrollToBottom()
+
   }
 
   scrollToBottom = () => {
