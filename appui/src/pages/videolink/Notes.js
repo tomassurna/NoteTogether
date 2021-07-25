@@ -120,7 +120,7 @@ class Notes extends React.Component {
       .addNote(
         this.state.videoId,
         time,
-        this.state.static ? 'static' : 'dynamic',
+        tag,
         message,
         window.ethereum.selectedAddress,
       )
