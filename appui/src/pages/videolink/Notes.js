@@ -4,7 +4,7 @@ import Player from './Player'
 import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
 import './VideoLink.scss'
 import Message from './Message'
-import axios from 'axios';
+import axios from 'axios'
 import {
   noteTogetherAddress,
   noteTogetherContract,
@@ -12,6 +12,7 @@ import {
   serverAcountId,
 } from '../../config'
 import playerTimeReducer from '../../redux/PlayerTimeReducer'
+import processError from '../../util/ErrorUtil'
 
 let store
 
@@ -33,19 +34,29 @@ class Notes extends React.Component {
     }
 
     store.subscribe(() => this.generateDynamicMessages())
+    this.textInput = React.createRef()
+    this.textButton = React.createRef()
+    this.focusTextInput = this.focusTextInput.bind(this)
   }
 
   generateDynamicMessages() {
+    if (this.state.static) {
+      return
+    }
+    console.log('s')
+
     // Loop through all the messages the filter out which ones are past the current timestamp
     const currentPlayerTime = store.getState().time
-    console.log(currentPlayerTime)
-
     this.setState({
       dynamicMessages: this.state.messages.filter(
         (element) => currentPlayerTime >= element.timestampInSeconds,
       ),
     })
     this.scrollToBottom()
+  }
+
+  focusTextInput() {
+    this.textInput.current.focus()
   }
 
   async componentDidMount() {
@@ -55,30 +66,32 @@ class Notes extends React.Component {
         .call()
 
       const userIdToNameMap = {}
-      userIdToNameMap[window.ethereum.selectedAddress] = this.state.userName
+      userIdToNameMap[window.ethereum.selectedAddress] =
+        this.state.userName || 'Guest User'
 
-      const data = await Promise.all(
-        notesData.map(async (element) => {
-          const userId = element.user
+      const data = []
 
-          if (!userIdToNameMap[userId]) {
-            const userNameData = await noteTogetherContract.methods
+      for (const element of notesData) {
+        const userId = element.user
+
+        if (!userIdToNameMap[userId]) {
+          const userNameData =
+            (await noteTogetherContract.methods
               .getUsernameById(userId)
-              .call()
+              .call()) || 'Guest User'
 
-            userIdToNameMap[userId] = userNameData
-          }
+          userIdToNameMap[userId] = userNameData
+        }
 
-          return {
-            message: element.message,
-            user: element.user,
-            tag: element.tag,
-            timestamp: element.timestamp,
-            userName: userIdToNameMap[userId] || 'Guest User',
-            timestampInSeconds: this.getSeconds(element.timestamp),
-          }
-        }),
-      )
+        data.push({
+          message: element.message,
+          user: element.user,
+          tag: element.tag,
+          timestamp: element.timestamp,
+          userName: userIdToNameMap[userId] || 'Guest User',
+          timestampInSeconds: this.getSeconds(element.timestamp),
+        })
+      }
 
       console.log(data)
 
@@ -109,11 +122,13 @@ class Notes extends React.Component {
       ],
     })
 
+    this.scrollToBottom()
+
     if (!this.state.static) {
       this.generateDynamicMessages()
     }
 
-    e.preventDefault()
+    e?.preventDefault()
     document.getElementById('note').value = ''
 
     noteTogetherContract.methods
@@ -129,17 +144,17 @@ class Notes extends React.Component {
         gas: 6700000,
       })
 
-      const note_analytic = {
-        video: this.state.videoId,
-        timestamp: time,
-        tag: tag,
-      };
+    const note_analytic = {
+      video: this.state.videoId,
+      timestamp: time,
+      tag: tag,
+      created_at: Date(),
+    }
 
-      axios
-      .post("http://localhost:3000/note_analytics/add", note_analytic)
-      .then((res) => console.log(res.data));
-    this.scrollToBottom()
-
+    axios
+      .post('http://localhost:8080/analytics/saveNoteLog', note_analytic)
+      .then((res) => console.log(res.data))
+      .catch((e) => processError(e))
   }
 
   scrollToBottom = () => {
@@ -153,12 +168,39 @@ class Notes extends React.Component {
     return seconds
   }
 
+  async generateTestData() {
+    for (let i = 0; i < 10; i++) {
+      const duration = store.getState().duration
+      const time = Math.random() * duration
+      this.state.videoRef.current.seekTo(time, 'seconds')
+
+      const tag = ['Answer', 'Question', 'Note'][Math.floor(Math.random() * 3)]
+      this.setState({ selectedTag: tag })
+
+      document.getElementById('note').value = Math.random()
+        .toString(36)
+        .substring(7)
+      // this.textButton.current.click()
+      await new Promise((r) => setTimeout(r, 2000))
+      await this.messageAdded()
+    }
+  }
+
   render() {
     return (
       <>
         {!this.state.loading && (
           <div className="flex-container-column">
-            <h3>Note Log</h3>
+            <div style={{ display: 'flex' }}>
+              <h3>Note Log</h3>
+              <CButton
+                style={{ marginLeft: '10px' }}
+                color="info"
+                onClick={() => this.generateTestData()}
+              >
+                Test Data
+              </CButton>
+            </div>
             <CCard className="notes-section">
               <CCardBody className="notes-section-body">
                 {this.state.static
@@ -199,11 +241,14 @@ class Notes extends React.Component {
                 id="note"
                 autoComplete="off"
                 placeholder="Enter Note Here"
+                ref={this.textInput}
               />
               <input
                 class="btn btn-dark notes-btn"
                 type="submit"
                 value="Enter"
+                onClick={this.focusTextInput}
+                ref={this.textButton}
               />
             </form>
             <div className="notes-radio">

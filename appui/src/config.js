@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 
-const serverAcountId = "0x7A5f4c5D9e49AA5a6A2432B8F99375cAf344c99c"
-const noteTogetherAddress = '0x6c71495af3083a22c66f57123edfc1a3907b72b7'
+const serverAcountId = "0xF34d5c6B33a399B33bF3FE82E3A9234605c6fF9d"
+const noteTogetherAddress = '0x52e9E68CAAc66EFa7314eb17500b434A5AF1F9DE'
 const projectId = '831be8f97ba94cc69df353bf84a9c574'
 const noteTogetherAbi = [
   {

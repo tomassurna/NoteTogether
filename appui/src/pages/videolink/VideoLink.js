@@ -2,6 +2,7 @@ import './VideoLink.scss'
 import React, { useEffect, useState } from 'react'
 import Player from './Player'
 import Notes from './Notes'
+import Analytics from '../analytics/Analytics'
 import { useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
@@ -26,6 +27,7 @@ function VideoLink() {
   const [userName, setUserName] = useState('')
   const [loading, setLoading] = useState(true)
   const [invalidLink, setInvalidLink] = useState(false)
+  const [showAnalytics, setShowAnalytics] = useState(false)
 
   // Time being just assume video links are being used
   useEffect(() => {
@@ -65,14 +67,23 @@ function VideoLink() {
             <div className="video-container">
               <CCard style={{ flexGrow: '1' }}>
                 <CCardHeader>
-                  <h3>{title}</h3>
+                  <div>
+                    <CButton
+                      color="info"
+                      onClick={() => setShowAnalytics(!showAnalytics)}
+                    >
+                      {showAnalytics ? 'Video' : 'Analtytics'}
+                    </CButton>
+                    <h3 className="float-right">{title}</h3>
+                  </div>
                 </CCardHeader>
-                <CCardBody>
+                <CCardBody style={showAnalytics ? { display: 'none' } : {}}>
                   <div className="aspect-ratio-box">
                     <div className="aspect-ratio-box-inside">
                       <Player
                         name={title}
                         url={url}
+                        videoId={videoId}
                         creator="Link Creator"
                         videoRef={videoRef}
                         store={store}
@@ -80,9 +91,18 @@ function VideoLink() {
                     </div>
                   </div>
                 </CCardBody>
+
+                {showAnalytics && (
+                  <CCardBody>
+                    <Analytics videoRef={videoRef} store={store}></Analytics>
+                  </CCardBody>
+                )}
               </CCard>
 
-              <CCard className="video-notes">
+              <CCard
+                className="video-notes"
+                style={showAnalytics ? { display: 'none' } : {}}
+              >
                 <CCardBody>
                   <Notes
                     videoRef={videoRef}
