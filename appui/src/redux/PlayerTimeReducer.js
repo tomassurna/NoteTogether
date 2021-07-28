@@ -1,8 +1,10 @@
 function playerTimeReducer(state = { time: 0 }, action) {
-  console.log(state)
+  // console.log(state)
   switch (action.type) {
     case 'playerTimeReducer/setTime':
-      return { time: action.time }
+      return { ...state, ...{ time: action.time } }
+    case 'playerTimeReducer/setDuration':
+      return { ...state, ...{ duration: action.time } }
     default:
       return state
   }
