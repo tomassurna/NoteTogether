@@ -1,8 +1,8 @@
 import Web3 from 'web3'
 
-const serverAcountId = "0xF34d5c6B33a399B33bF3FE82E3A9234605c6fF9d"
-const noteTogetherAddress = '0x52e9E68CAAc66EFa7314eb17500b434A5AF1F9DE'
-// const projectId = '831be8f97ba94cc69df353bf84a9c574'
+const serverAcountId = "0x06C2b3c0174Df5a6006c7A0132203A2715Ec9322"
+const noteTogetherAddress = '0xB3f86E226D26522b0EE764e3687C728848DE9036'
+const projectId = '831be8f97ba94cc69df353bf84a9c574'
 const noteTogetherAbi = [
   {
     "constant": false,
@@ -217,12 +217,12 @@ const noteTogetherAbi = [
     "type": "function"
   }
 ]
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+// const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
 // Ropsten
-// const web3 = new Web3(
-//   new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/" + projectId)
-// );
+const web3 = new Web3(
+  new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/" + projectId)
+);
 
 const noteTogetherContract = new web3.eth.Contract(
   noteTogetherAbi,
