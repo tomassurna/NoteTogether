@@ -3,11 +3,10 @@ import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
 import './VideoLink.scss'
 import Message from './Message'
 import axios from 'axios'
-import {
-  noteTogetherContract,
-  serverAcountId,
-} from '../../config'
+import { noteTogetherContract, serverAcountId, web3 } from '../../config'
 import processError from '../../util/ErrorUtil'
+
+const Tx = require('ethereumjs-tx').Transaction
 
 let store
 
@@ -126,30 +125,71 @@ class Notes extends React.Component {
     e?.preventDefault()
     document.getElementById('note').value = ''
 
-    noteTogetherContract.methods
-      .addNote(
-        this.state.videoId,
-        time,
-        tag,
-        message,
-        window.ethereum.selectedAddress,
-      )
-      .send({
-        from: serverAcountId,
-        gas: 6700000,
-      })
+    // noteTogetherContract.methods
+    //   .addNote(
+    //     this.state.videoId,
+    //     time,
+    //     tag,
+    //     message,
+    //     window.ethereum.selectedAddress,
+    //   )
+    //   .send({
+    //     from: serverAcountId,
+    //     gas: 6700000,
+    //   })
 
-    const note_analytic = {
-      video: this.state.videoId,
-      timestamp: time,
-      tag: tag,
-      created_at: Date(),
+    // console.log()
+
+    const txCount =
+      '0x' +
+      ((await web3.eth.getTransactionCount(serverAcountId)) + 1).toString(16)
+    const txObject = {
+      nonce: txCount,
+      gasLimit: web3.utils.toHex(6700000),
+      gasPrice: web3.utils.toHex(await web3.eth.getGasPrice()),
+      to: noteTogetherContract._address,
+      data: noteTogetherContract.methods
+        .addNote(
+          this.state.videoId,
+          time,
+          tag,
+          message,
+          window.ethereum.selectedAddress,
+        )
+        .encodeABI(),
     }
 
-    axios
-      .post('http://localhost:8080/analytics/saveNoteLog', note_analytic)
-      .then((res) => console.log(res.data))
-      .catch((e) => processError(e))
+    console.log(txObject)
+
+    const tx = new Tx(txObject, { chain: 'ropsten' })
+    tx.sign(
+      Buffer.from(
+        '728f029b58d3d7fa8e23fd8889333e9e64ea26d6938f53642a04a9a18629d13b',
+        'hex',
+      ),
+    )
+
+    const serializedTx = tx.serialize()
+    const raw = '0x' + serializedTx.toString('hex')
+
+    web3.eth
+      .sendSignedTransaction(raw)
+      .catch((err) => {
+        processError(err)
+      })
+      .then(() => {
+        const note_analytic = {
+          video: this.state.videoId,
+          timestamp: time,
+          tag: tag,
+          created_at: Date(),
+        }
+
+        axios
+          .post('http://localhost:8080/analytics/saveNoteLog', note_analytic)
+          .then((res) => console.log(res.data))
+          .catch((e) => processError(e))
+      })
   }
 
   scrollToBottom = () => {

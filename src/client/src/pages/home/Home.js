@@ -63,7 +63,7 @@ class Home extends React.Component {
     while (loop) {
       const transaction = await web3.eth.getTransactionReceipt(txHash)
 
-      if (!transaction.status) {
+      if (!transaction?.status) {
         await new Promise((resolve) => setTimeout(resolve, 6000))
       } else {
         loop = false

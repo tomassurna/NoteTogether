@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "chart.js": "^3.5.0",
+    "ethereumjs-tx": "^2.1.2",
     "ipfs-http-client": "^33.1.1",
     "mongodb": "^4.0.1",
     "mongoose": "^5.13.3",
