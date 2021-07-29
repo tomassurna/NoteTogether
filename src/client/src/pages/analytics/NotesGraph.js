@@ -116,17 +116,6 @@ class NotesGraph extends React.Component {
           <Line
             data={this.data()}
             options={this.options()}
-            options={{
-              responsive: true,
-              scales: {
-                x: {
-                  display: true,
-                },
-                y: {
-                  display: true,
-                },
-              },
-            }}
           />
         </div>
       </>

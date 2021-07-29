@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 class Message extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     let tagStyle = {}
     switch (this.props.tag) {

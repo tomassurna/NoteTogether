@@ -1,17 +1,12 @@
 import React from 'react'
-import { useState } from 'react'
-import Player from './Player'
 import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
 import './VideoLink.scss'
 import Message from './Message'
 import axios from 'axios'
 import {
-  noteTogetherAddress,
   noteTogetherContract,
-  web3,
   serverAcountId,
 } from '../../config'
-import playerTimeReducer from '../../redux/PlayerTimeReducer'
 import processError from '../../util/ErrorUtil'
 
 let store

@@ -6,7 +6,7 @@ import Analytics from '../analytics/Analytics'
 import { useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
-import { noteTogetherContract, web3 } from '../../config'
+import { noteTogetherContract } from '../../config'
 import { createStore } from 'redux'
 import playerTimeReducer from '../../redux/PlayerTimeReducer'
 
