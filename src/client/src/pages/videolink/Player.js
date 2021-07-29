@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ReactPlayer from 'react-player'
-import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
 import './VideoLink.scss'
-import playerTimeReducer from '../../redux/PlayerTimeReducer'
 import axios from 'axios'
 import processError from '../../util/ErrorUtil'
 
