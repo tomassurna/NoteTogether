@@ -15,7 +15,7 @@ jobs:
         with:
           java-version: 11
       - name: Build with Maven
-        run: mvn clean package
+        run: mvn clean package -e
       - uses: azure/webapps-deploy@v2
         with:
           app-name: notetogether
