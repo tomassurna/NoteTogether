@@ -8,10 +8,10 @@
         <version>2.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.noteTogether</groupId>
-    <artifactId>noteTogether</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>noteTogether</name>
+    <groupId>com.notetogether</groupId>
+    <artifactId>notetogether</artifactId>
+    <version>1</version>
+    <name>notetogether</name>
     <description>Note Together</description>
 
 
@@ -22,6 +22,8 @@
         <frontend-src-dir>${project.basedir}/src/client</frontend-src-dir>
         <nodeVersion>v12.19.0</nodeVersion>
         <yarnVersion>v1.22.10</yarnVersion>
+        <jib-maven-plugin.version>2.5.2</jib-maven-plugin.version>
+        <docker.image.prefix>noteTogether</docker.image.prefix>
     </properties>
 
 
