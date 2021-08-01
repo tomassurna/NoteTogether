@@ -18,7 +18,6 @@
 
 .video-section {
   display: flex;
-  // align-items: flex-end;
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
@@ -31,7 +30,7 @@
   flex-direction: column;
 }
 
-.form-container{
+.form-container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -41,6 +40,7 @@
 .link-radio {
   width: 60px;
 }
+
 .youtube-link {
   margin-bottom: 20px;
   margin-right: 5px;
@@ -54,7 +54,6 @@
   font-size: 2.3rem;
   width: 10%;
 }
-
 
 .label-text {
   font-family: "Lato", sans-serif;

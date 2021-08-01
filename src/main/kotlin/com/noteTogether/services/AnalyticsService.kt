@@ -16,10 +16,10 @@ class AnalyticsService(
         private val noteLogRepository: NoteLogRepository,
         private val viewLogRepository: ViewLogRepository
 ) {
-    fun generateNoteLogGraphData(): Map<String, Map<String, Int>> {
+    fun generateNoteLogGraphData(video: String): Map<String, Map<String, Int>> {
         val TICK_SIZE = 5
 
-        val noteLogs: List<NoteLog> = noteLogRepository.findAll()
+        val noteLogs: List<NoteLog> = noteLogRepository.findAllByVideo(video)
 
         // Loop through noteLogs and generate graph data where the key is an increment of 30 seconds
 
@@ -57,13 +57,12 @@ class AnalyticsService(
         return data
     }
 
-    fun generateViewLogGraphData(): Map<String, Map<String, Int>> {
+    fun generateViewLogGraphData(video: String): Map<String, Map<String, Int>> {
         val TICK_SIZE = 30
 
-        val viewLogs: List<ViewLog> = viewLogRepository.findAll()
+        val viewLogs: List<ViewLog> = viewLogRepository.findAllByVideo(video)
 
         // Loop through noteLogs and generate graph data where the key is an increment of 30 seconds
-
         val data = mutableMapOf<String, MutableMap<String, Int>>()
 
         viewLogs.forEach {
@@ -106,7 +105,7 @@ class AnalyticsService(
             }
         }
 
-        val noteLogs: List<NoteLog> = noteLogRepository.findAll()
+        val noteLogs: List<NoteLog> = noteLogRepository.findAllByVideo(video)
 
         noteLogs.forEach {
             val localTime = LocalTime.parse(it.timestamp, DateTimeFormatter.ofPattern("HH:mm:ss"))

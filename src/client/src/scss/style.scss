@@ -16,8 +16,6 @@
 }
 
 body {
-  // background-color: #282c34;
-  // width: 75vw;
   height: 100vh;
   margin: auto;
 }
@@ -56,6 +54,7 @@ a:hover {
 .hand-cursor {
   cursor: pointer;
 }
+
 .custom-file {
   position: relative;
   display: inline-block;
@@ -64,6 +63,7 @@ a:hover {
   margin-bottom: 0;
   cursor: pointer;
 }
+
 .custom-file-input {
   min-width: 14rem;
   max-width: 100%;
@@ -72,6 +72,7 @@ a:hover {
   opacity: 0;
   cursor: pointer;
 }
+
 .custom-file-control {
   position: absolute;
   top: 0;

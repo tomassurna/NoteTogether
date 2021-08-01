@@ -38,14 +38,14 @@ class AnalyticsController(
 
     @CrossOrigin(origins = ["http://localhost:3001"])
     @GetMapping("/generateNoteLogGraphData")
-    fun generateNoteLogGraphData(): ResponseEntity<Map<String, Map<String, Int>>> {
-        return ResponseEntity.ok(analyticsService.generateNoteLogGraphData())
+    fun generateNoteLogGraphData(@RequestParam video: String): ResponseEntity<Map<String, Map<String, Int>>> {
+        return ResponseEntity.ok(analyticsService.generateNoteLogGraphData(video))
     }
 
     @CrossOrigin(origins = ["http://localhost:3001"])
     @GetMapping("/generateViewLogGraphData")
-    fun generateViewLogGraphData(): ResponseEntity<Map<String, Map<String, Int>>> {
-        return ResponseEntity.ok(analyticsService.generateViewLogGraphData())
+    fun generateViewLogGraphData(@RequestParam video: String): ResponseEntity<Map<String, Map<String, Int>>> {
+        return ResponseEntity.ok(analyticsService.generateViewLogGraphData(video))
     }
 
     @CrossOrigin(origins = ["http://localhost:3001"])

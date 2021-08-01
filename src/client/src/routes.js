@@ -10,9 +10,13 @@ const About = React.lazy(() => import("./pages/about/About.js"));
 const routes = [
   { path: "/", exact: true, name: "Home", component: Home },
   { path: "/pages/home", name: "Home", component: Home },
-  { path: "/pages/videolink/:videoId", name: "VideoLink", component: VideoLink },
+  {
+    path: "/pages/videolink/:videoId",
+    name: "VideoLink",
+    component: VideoLink,
+  },
   { path: "/pages/profile", name: "Profile", component: Profile },
-  { path: "/pages/aboutUs", name: "About", component: About}
+  { path: "/pages/aboutUs", name: "About", component: About },
 ];
 
 export default routes;

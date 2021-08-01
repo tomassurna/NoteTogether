@@ -1,20 +1,20 @@
-import { noteTogetherAddress, noteTogetherContract, web3 } from '../../config'
-import { CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
-import React from 'react'
-import './Profile.scss'
+import { noteTogetherAddress, noteTogetherContract, web3 } from "../../config";
+import { CButton, CCard, CCardBody, CCardHeader } from "@coreui/react";
+import React from "react";
+import "./Profile.scss";
 
 class UserNameEditor extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      userName: '',
-    }
+      userName: "",
+    };
   }
 
   onChange = (event) => {
-    this.setState({ userName: event.target.value })
-  }
+    this.setState({ userName: event.target.value });
+  };
 
   async applyChanges() {
     const transactionParameters = {
@@ -23,12 +23,12 @@ class UserNameEditor extends React.Component {
       data: noteTogetherContract.methods
         .changeUsername(this.state.userName)
         .encodeABI(),
-    }
+    };
 
     const txHash = await window.window.ethereum.request({
-      method: 'eth_sendTransaction',
+      method: "eth_sendTransaction",
       params: [transactionParameters],
-    })
+    });
 
     await web3.eth.getTransactionReceipt(txHash);
     window.location.reload();
@@ -47,9 +47,9 @@ class UserNameEditor extends React.Component {
               placeholder="Change Username"
               value={this.state.userName}
               onChange={this.onChange.bind(this)}
-            ></input>
+            />
             <CButton
-              style={{ marginTop: '3%' }}
+              style={{ marginTop: "3%" }}
               color="success"
               className="height-25-rem float-right"
               onClick={this.applyChanges.bind(this)}
@@ -59,7 +59,8 @@ class UserNameEditor extends React.Component {
           </CCardBody>
         </CCard>
       </>
-    )
+    );
   }
 }
-export default UserNameEditor
+
+export default UserNameEditor;

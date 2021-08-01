@@ -32,10 +32,6 @@
 
 .video-box {
   display: flex;
-  //height: 600px;
-  // width: 100%;
-  // max-width: 1000px;
-  // max-height: 600px;
   border: 1px solid black;
   border-radius: 5px;
   background-color: gray;
@@ -47,21 +43,6 @@
   display: flex;
   justify-content: space-around;
 }
-
-// .video-player {
-//   flex-grow: 1;
-// //   margin: 1%;
-// //   height: 85vh;
-//   display: block;
-//   width: 100vw;
-//   max-width: 100%;
-// //   max-width: 177.78vh;
-//   /* 16/9 = 1.778 */
-//   height: 56.25vw;
-//   /* height:width ratio = 9/16 = .5625  */
-//   max-height: 100%;
-//   background-color: black;
-// }
 
 .aspect-ratio-box {
   height: 0;
@@ -100,13 +81,16 @@
   width: auto; // Reset width
   height: auto; // Reset height
 }
+
 .react-player {
   padding-top: 56.25%; // Percentage ratio for 16:9
   position: relative; // Set to relative
 }
+
 .message {
   margin: 1%;
 }
+
 .react-player > div {
   position: absolute; // Scaling will occur since parent is relative now
 }
@@ -135,6 +119,7 @@
   margin: 5%;
   margin-top: 0;
 }
+
 .notes-section-body {
   padding: 0.25rem;
 }

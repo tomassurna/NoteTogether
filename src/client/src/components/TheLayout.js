@@ -1,24 +1,24 @@
-import React from 'react'
-import { TheContent, TheFooter, TheHeader } from './index'
-import Login from './Login'
+import React from "react";
+import { TheContent, TheFooter, TheHeader } from "./index";
+import Login from "./Login";
 
 class TheLayout extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       isLoginModalOpen: true,
-      accountId: '',
-    }
+      accountId: "",
+    };
 
     if (!!window.ethereum) {
-      window.ethereum.on('accountsChanged', (accounts) => {
+      window.ethereum.on("accountsChanged", (accounts) => {
         if (!!window.ethereum.selectedAddress && this.state.isLoginModalOpen) {
-          this.setState({ isLoginModalOpen: false })
+          this.setState({ isLoginModalOpen: false });
         }
 
         if (!this.state.accountId && accounts.length > 0) {
-          this.setState({ accountId: window.ethereum.selectedAddress })
+          this.setState({ accountId: window.ethereum.selectedAddress });
         }
 
         if (
@@ -26,14 +26,14 @@ class TheLayout extends React.Component {
             accounts.length === 0) &&
           !this.state.isLoginModalOpen
         ) {
-          window.location.reload()
+          window.location.reload();
         }
-      })
+      });
     }
   }
 
   onLoginCallback() {
-    this.setState({ isLoginModalOpen: false })
+    this.setState({ isLoginModalOpen: false });
   }
 
   render() {
@@ -42,13 +42,13 @@ class TheLayout extends React.Component {
         <div className="c-wrapper">
           <TheHeader
             // Hack to reconstruct the entire component in order for the account info to be passed in
-            key={this.state.isLoginModalOpen ? '1' : '2'}
+            key={this.state.isLoginModalOpen ? "1" : "2"}
           />
           <div className="c-body layout">
             {!!window?.ethereum?.selectedAddress && (
               <TheContent
                 // Hack to reconstruct the entire component in order for the account info to be passed in
-                key={this.state.isLoginModalOpen ? '3' : '4'}
+                key={this.state.isLoginModalOpen ? "3" : "4"}
               />
             )}
             <Login
@@ -57,14 +57,14 @@ class TheLayout extends React.Component {
                 !window.ethereum || !window.ethereum.selectedAddress
               }
               // Hack to reconstruct the entire component in order for the account info to be passed in
-              key={this.state.isLoginModalOpen ? '5' : '6'}
+              key={this.state.isLoginModalOpen ? "5" : "6"}
             />
           </div>
           <TheFooter />
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default TheLayout
+export default TheLayout;

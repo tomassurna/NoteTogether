@@ -1,13 +1,13 @@
-import React from 'react'
-import UserNameEditor from './UserNameEditor.js'
-import './Profile.scss'
+import React from "react";
+import UserNameEditor from "./UserNameEditor.js";
+import "./Profile.scss";
 
 function Profile() {
   return (
     <div id="home">
-        <UserNameEditor />
+      <UserNameEditor />
     </div>
-  )
+  );
 }
 
-export default Profile
+export default Profile;

@@ -1,17 +1,17 @@
-import React from 'react'
-import ReactPlayer from 'react-player'
-import './VideoLink.scss'
-import axios from 'axios'
-import processError from '../../util/ErrorUtil'
+import React from "react";
+import ReactPlayer from "react-player";
+import "./VideoLink.scss";
+import axios from "axios";
+import processError from "../../util/ErrorUtil";
 
-let store
-let view_analytics
+let store;
+let view_analytics;
 
 class Player extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    store = props.store
+    store = props.store;
 
     this.state = {
       name: props.name,
@@ -19,7 +19,7 @@ class Player extends React.Component {
       url: props.url,
       creator: props.creator,
       videoId: props.videoId,
-    }
+    };
   }
 
   render() {
@@ -33,82 +33,63 @@ class Player extends React.Component {
           controls={true}
           onProgress={(e) =>
             store.dispatch({
-              type: 'playerTimeReducer/setTime',
+              type: "playerTimeReducer/setTime",
               time: e.playedSeconds,
             })
           }
           onDuration={(e) =>
             store.dispatch({
-              type: 'playerTimeReducer/setDuration',
+              type: "playerTimeReducer/setDuration",
               time: e,
             })
           }
           onPlay={() => {
             const time = new Date(
-              this.state.videoRef.current.getCurrentTime() * 1000,
+              this.state.videoRef.current.getCurrentTime() * 1000
             )
               .toISOString()
-              .substr(11, 8)
+              .substr(11, 8);
 
             view_analytics = {
               video: this.state.videoId,
               startTime: time,
               endTime: null,
-            }
+            };
           }}
           onPause={() => {
             if (
               !!view_analytics &&
               !(
-                typeof this.state.videoId === 'undefined' ||
+                typeof this.state.videoId === "undefined" ||
                 this.state.videoId === null
               )
             ) {
-              const time = new Date(
-                this.state.videoRef.current.getCurrentTime() * 1000,
+              view_analytics.endTime = new Date(
+                this.state.videoRef.current.getCurrentTime() * 1000
               )
                 .toISOString()
-                .substr(11, 8)
-
-              view_analytics.endTime = time
-              view_analytics.created_at = Date()
-
-              console.log(view_analytics)
+                .substr(11, 8);
+              view_analytics.created_at = Date();
 
               const headers = {
-                'Content-Type': 'text/plain',
-              }
+                "Content-Type": "text/plain",
+              };
 
               axios
                 .post(
-                  'http://localhost:3000/view_analytics/add',
+                  "http://localhost:3000/view_analytics/add",
                   view_analytics,
-                  { headers },
+                  { headers }
                 )
-                .then((res) => console.log(res.data))
-                .catch((e) => processError(e))
+                .catch((e) => processError(e));
 
-              view_analytics = undefined
+              view_analytics = undefined;
             }
-          }}
-          onSeek={(e) => {
-            // const note_analytic = {
-            //   video: this.state.videoId,
-            //   timestamp: time,
-            //   tag: tag,
-            // }
-
-            console.log(e)
-
-            // axios
-            //   .post('http://localhost:3000/seek_analytics/add', note_analytic)
-            //   .then((res) => console.log(res.data))
-            //   .catch((e) => processError(e))
           }}
         />
       </>
-    )
+    );
   }
 }
 
-export default Player
+export default Player;

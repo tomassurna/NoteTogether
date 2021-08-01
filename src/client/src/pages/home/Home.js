@@ -1,49 +1,56 @@
-import { CButton, CCard, CCardBody } from '@coreui/react'
-import React from 'react'
-import { noteTogetherAddress, noteTogetherContract, web3 } from '../../config'
-import './Home.scss'
+import { CButton, CCard, CCardBody } from "@coreui/react";
+import React from "react";
+import { noteTogetherAddress, noteTogetherContract, web3 } from "../../config";
+import "./Home.scss";
 
-const ipfsClient = require('ipfs-http-client')
+const ipfsClient = require("ipfs-http-client");
 const ipfs = ipfsClient({
-  host: 'ipfs.infura.io',
+  host: "ipfs.infura.io",
   port: 5001,
-  protocol: 'https',
-})
+  protocol: "https",
+});
 
 class Home extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       videoUrl: null,
       videoBuffer: null,
       title: null,
-    }
+    };
   }
 
   loadFile = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const file = event.target.files[0]
-    const reader = new window.FileReader()
+    const file = event.target.files[0];
+    const reader = new window.FileReader();
 
     reader.onloadend = async function Response(event) {
-      this.setState({ videoBuffer: Buffer(event.target.result) })
-    }
+      this.setState({ videoBuffer: Buffer(event.target.result) });
+    };
 
-    reader.readAsArrayBuffer(file)
-  }
+    reader.readAsArrayBuffer(file);
+  };
 
   async upload() {
-    let results
+    let results;
 
     if (this.state.videoUrl != null) {
-      results = await ipfs.add(Buffer(this.state.videoUrl))
+      results = await ipfs.add(
+        Buffer(
+          JSON.stringify({
+            video: this.state.videoUrl,
+            time: new Date().toISOString(),
+          })
+        )
+      );
     } else {
-      results = await ipfs.add(this.state.videoBuffer)
+      results = await ipfs.add(this.state.videoBuffer);
     }
 
-    const { hash } = results[0]
+    const { hash } = results[0];
 
     const transactionParameters = {
       to: noteTogetherAddress,
@@ -51,48 +58,48 @@ class Home extends React.Component {
       data: noteTogetherContract.methods
         .addVideo(hash, this.state.title)
         .encodeABI(),
-    }
+    };
 
     const txHash = await window.ethereum.request({
-      method: 'eth_sendTransaction',
+      method: "eth_sendTransaction",
       params: [transactionParameters],
-    })
+    });
 
     // Hack to wait for transaction to be mined before redirecting page
-    let loop = true
+    let loop = true;
     while (loop) {
-      const transaction = await web3.eth.getTransactionReceipt(txHash)
+      const transaction = await web3.eth.getTransactionReceipt(txHash);
 
       if (!transaction?.status) {
-        await new Promise((resolve) => setTimeout(resolve, 6000))
+        await new Promise((resolve) => setTimeout(resolve, 6000));
       } else {
-        loop = false
+        loop = false;
       }
     }
 
-    this.props.history.push('/pages/videoLink/' + hash)
+    this.props.history.push("/pages/videoLink/" + hash);
   }
 
   canUpload() {
     return (
       (!!this.state.videoBuffer || !!this.state.videoUrl) && !!this.state.title
-    )
+    );
   }
 
   render() {
     return (
       <>
         <div className="card-container">
-          <CCard style={{ width: '50%' }}>
+          <CCard style={{ width: "50%" }}>
             <CCardBody>
-              <div style={{ textAlign: 'center', flexGrow: 1 }}>
+              <div style={{ textAlign: "center", flexGrow: 1 }}>
                 <span
                   className="display-inline"
-                  style={{ fontSize: '3rem', color: 'blue' }}
+                  style={{ fontSize: "3rem", color: "blue" }}
                 >
                   Note Together
                 </span>
-                <br></br>
+                <br />
                 <p className="display-inline">
                   Upload using a Youtube Link or your own Video File! Then add a
                   title!
@@ -103,7 +110,7 @@ class Home extends React.Component {
                   <label
                     htmlFor="videoTitle"
                     className="label-text"
-                    style={{ width: '80%' }}
+                    style={{ width: "80%" }}
                   >
                     Video Title
                     <input
@@ -118,7 +125,7 @@ class Home extends React.Component {
                   <label
                     htmlFor="videoLink"
                     className="label-text input-container"
-                    style={{ maxWidth: '80%' }}
+                    style={{ maxWidth: "80%" }}
                   >
                     Video Link
                     <input
@@ -130,11 +137,11 @@ class Home extends React.Component {
                       }
                     />
                   </label>
-                  <h3 style={{ fontWeight: 600, marginTop: '4%' }}>OR</h3>
+                  <h3 style={{ fontWeight: 600, marginTop: "4%" }}>OR</h3>
                   <label
                     htmlFor="vidFile"
                     className="label-text input-container"
-                    style={{ maxWidth: '80%' }}
+                    style={{ maxWidth: "80%" }}
                   >
                     Video File
                     <input
@@ -142,11 +149,12 @@ class Home extends React.Component {
                       className="form-control"
                       id="vidFile"
                       onChange={this.loadFile}
-                    ></input>
+                      disabled={true}
+                    />
                   </label>
                 </div>
               </div>
-              <div className="float-right" style={{ marginTop: '5%' }}>
+              <div className="float-right" style={{ marginTop: "5%" }}>
                 <CButton
                   color="success"
                   className="height-25-rem btn-lg"
@@ -163,8 +171,8 @@ class Home extends React.Component {
           </CCard>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default Home
+export default Home;

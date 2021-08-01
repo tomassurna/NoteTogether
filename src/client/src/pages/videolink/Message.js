@@ -1,27 +1,27 @@
-import React from 'react'
+import React from "react";
 
 class Message extends React.Component {
   render() {
-    let tagStyle = {}
+    let tagStyle = {};
     switch (this.props.tag) {
       case "Question":
-        tagStyle = {color: "red"}
+        tagStyle = { color: "red" };
         break;
       case "Note":
-        tagStyle = {color: "black"}
+        tagStyle = { color: "black" };
         break;
       case "Answer":
-        tagStyle = {color: "blue"}
+        tagStyle = { color: "blue" };
         break;
       default:
-        tagStyle = {color: "black"}
+        tagStyle = { color: "black" };
         break;
     }
     return (
       <>
         <div className="message" key={this.props.index}>
           <span>{this.props.timestamp}</span>
-          <span>  </span>
+          <span> </span>
           <span style={tagStyle}>{this.props.tag}</span>
           <br />
           <span>
@@ -31,8 +31,8 @@ class Message extends React.Component {
           </span>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default Message
+export default Message;

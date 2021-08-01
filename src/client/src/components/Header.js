@@ -1,47 +1,46 @@
-import { brandSet, freeSet } from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
-import { CHeader, CHeaderNav } from '@coreui/react'
-import React from 'react'
-import { noteTogetherContract, web3 } from '../config'
-import processError from '../util/ErrorUtil'
-import './Components.scss'
+import { brandSet, freeSet } from "@coreui/icons";
+import CIcon from "@coreui/icons-react";
+import { CHeader, CHeaderNav } from "@coreui/react";
+import React from "react";
+import { noteTogetherContract, web3 } from "../config";
+import processError from "../util/ErrorUtil";
+import "./Components.scss";
 
 class Header extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       balance: 0,
-    }
+    };
 
-    this.getBalance()
+    this.getBalance();
   }
 
   async getBalance() {
     try {
       // If private key is not set then do not proceed
       if (!window.ethereum || !window.ethereum.selectedAddress) {
-        return
+        return;
       }
 
       const balance = web3.utils.fromWei(
-        await web3.eth.getBalance(window.ethereum.selectedAddress),
-      )
+        await web3.eth.getBalance(window.ethereum.selectedAddress)
+      );
 
       const userName = await noteTogetherContract.methods
         .getUsernameById(window.ethereum.selectedAddress)
-        .call()
+        .call();
 
       if (balance !== this.state.balance) {
-        this.setState({ balance: balance, userName: userName })
+        this.setState({ balance: balance, userName: userName });
       }
     } catch (error) {
-      processError(error)
-      return
+      processError(error);
     }
   }
 
   render() {
-    this.getBalance()
+    this.getBalance();
 
     return (
       <CHeader withSubheader>
@@ -54,7 +53,7 @@ class Header extends React.Component {
             NoteTogether
           </a>
           <span className="c-header-toggler">
-            <span className="c-header-toggler-icon"></span>
+            <span className="c-header-toggler-icon" />
           </span>
           <ul className="c-header-nav mr-auto">
             <li className="c-header-nav-item">
@@ -78,7 +77,7 @@ class Header extends React.Component {
               <span className="userId">
                 {!!window.ethereum
                   ? this.state.userName || window.ethereum.selectedAddress
-                  : 'Guest User'}{' '}
+                  : "Guest User"}{" "}
                 -
               </span>
               <span>
@@ -87,15 +86,15 @@ class Header extends React.Component {
               </span>
               <CIcon
                 content={freeSet.cilAddressBook}
-                size={'2xl'}
+                size={"2xl"}
                 className="contract-book-icon"
               />
             </a>
           </div>
         </CHeaderNav>
       </CHeader>
-    )
+    );
   }
 }
 
-export default Header
+export default Header;

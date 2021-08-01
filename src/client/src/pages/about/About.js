@@ -1,6 +1,6 @@
-import React from 'react'
-import './About.scss'
-import { CCallout, CCard, CCardBody } from '@coreui/react'
+import React from "react";
+import "./About.scss";
+import { CCallout, CCard, CCardBody } from "@coreui/react";
 
 function About() {
   return (
@@ -16,7 +16,7 @@ function About() {
             simple and easy to understand for any user on any device to use.
           </h2>
           <h2 className="description">
-            {' '}
+            {" "}
             The process in using this application is straightforward. A video is
             uploaded either using a Youtube link or a video file from the user's
             device which will mostly be the teacher. After choosing a title, the
@@ -39,7 +39,7 @@ function About() {
         </section>
       </CCardBody>
     </CCard>
-  )
+  );
 }
 
-export default About
+export default About;

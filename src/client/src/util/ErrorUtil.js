@@ -3,8 +3,7 @@ import Alert from "react-s-alert";
 const processError = (error) => {
   let errorCode = "";
 
-  // TODO Remove later
-  console.log(error);
+  console.debug(error);
 
   try {
     if (!!error.data) {
