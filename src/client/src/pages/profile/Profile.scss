@@ -1,0 +1,33 @@
+#profile {
+  .username-section {
+    position: absolute;
+    right: 6%;
+    top: 8%;
+
+    .input {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .apply-Button {
+      background-color: #7892c2;
+      border: 1px solid #4e6096;
+      display: inline-block;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 1rem;
+      padding: 10px 20px;
+      text-decoration: none;
+      text-shadow: 0px 1px 0px #283966;
+    }
+
+    .apply-Button:hover {
+      background-color: #476e9e;
+    }
+
+    .apply-Button:active {
+      position: relative;
+      top: 1px;
+    }
+  }
+}

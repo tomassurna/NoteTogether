@@ -1,0 +1,143 @@
+// Import CoreUI styles
+@import "~@coreui/coreui/scss/coreui.scss";
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+body {
+  height: 100vh;
+  margin: auto;
+}
+
+.boxsizingBorder {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.icon-holder {
+  float: left;
+  display: block;
+  text-align: center;
+  margin-top: 0.875rem;
+}
+
+.icon-holder .icon-text {
+  display: block;
+}
+
+.post-icons {
+  width: 20%;
+  padding-left: 1.25rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+a,
+a:hover {
+  color: inherit;
+  text-decoration: none; /* no underline */
+}
+
+.hand-cursor {
+  cursor: pointer;
+}
+
+.custom-file {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  height: 2.5rem;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.custom-file-input {
+  min-width: 14rem;
+  max-width: 100%;
+  height: 2.5rem;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-file-control {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  line-height: 1.5;
+  color: #3e515b;
+  pointer-events: none;
+  user-select: none;
+  background-color: #fff;
+  border: 1px solid #c2cfd6;
+  cursor: pointer;
+}
+
+.custom-file-control::before {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  z-index: 6;
+  display: block;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  line-height: 1.5;
+  color: #3e515b;
+  background-color: #c2cfd6;
+  border: 1px solid #c2cfd6;
+  cursor: pointer;
+}
+
+.custom-file-control:lang(en):empty::after {
+  content: "Choose file...";
+}
+
+.custom-file-control:lang(en)::before {
+  content: "Browse";
+}
+
+.display-inline {
+  display: inline;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
