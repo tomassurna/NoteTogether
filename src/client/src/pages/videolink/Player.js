@@ -77,7 +77,7 @@ class Player extends React.Component {
 
               axios
                 .post(
-                  "http://localhost:3000/view_analytics/add",
+                  "http://localhost:80/view_analytics/add",
                   view_analytics,
                   { headers }
                 )

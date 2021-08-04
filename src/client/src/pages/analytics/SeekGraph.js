@@ -22,7 +22,7 @@ class SeekGraph extends React.Component {
   async componentDidMount() {
     const allGraphData = (
       await axios.get(
-        `http://localhost:8080/analytics/generateViewLogGraphData?video=${this.props.videoId}`
+        `http://localhost:80/analytics/generateViewLogGraphData?video=${this.props.videoId}`
       )
     ).data;
 

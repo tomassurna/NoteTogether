@@ -163,7 +163,7 @@ class Notes extends React.Component {
     };
 
     axios
-      .post("http://localhost:8080/analytics/saveNoteLog", note_analytic)
+      .post("http://localhost:80/analytics/saveNoteLog", note_analytic)
       .catch((e) => processError(e));
   }
 

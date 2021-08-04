@@ -36,19 +36,19 @@ class AnalyticsController(
         private val viewLogRepository: ViewLogRepository
 ) {
 
-    @CrossOrigin(origins = ["http://localhost:3001", "http://localhost:8080"])
+    @CrossOrigin(origins = ["http://localhost:3001", "http://localhost:8080", "http://localhost:80"])
     @GetMapping("/generateNoteLogGraphData")
     fun generateNoteLogGraphData(@RequestParam video: String): ResponseEntity<Map<String, Map<String, Int>>> {
         return ResponseEntity.ok(analyticsService.generateNoteLogGraphData(video))
     }
 
-    @CrossOrigin(origins = ["http://localhost:3001", "http://localhost:8080"])
+    @CrossOrigin(origins = ["http://localhost:3001", "http://localhost:8080", "http://localhost:80"])
     @GetMapping("/generateViewLogGraphData")
     fun generateViewLogGraphData(@RequestParam video: String): ResponseEntity<Map<String, Map<String, Int>>> {
         return ResponseEntity.ok(analyticsService.generateViewLogGraphData(video))
     }
 
-    @CrossOrigin(origins = ["http://localhost:3001", "http://localhost:8080"])
+    @CrossOrigin(origins = ["http://localhost:3001", "http://localhost:8080", "http://localhost:80"])
     @PostMapping("/saveNoteLog")
     fun saveNoteLog(@RequestBody noteLogJson: NoteLogJson): ResponseEntity<NoteLog> {
         val noteLog: NoteLog = noteLogRepository.insert(NoteLog(noteLogJson.video, noteLogJson.tag, noteLogJson.timestamp, noteLogJson.created_at))
@@ -56,7 +56,7 @@ class AnalyticsController(
         return ResponseEntity(noteLog, HttpStatus.OK)
     }
 
-    @CrossOrigin(origins = ["http://localhost:3001", "http://localhost:8080"])
+    @CrossOrigin(origins = ["http://localhost:3001", "http://localhost:8080", "http://localhost:80"])
     @PostMapping("/saveViewLog")
     fun saveViewLog(@RequestBody viewLogJson: ViewLogJson): ResponseEntity<ViewLog> {
         val viewLog: ViewLog = viewLogRepository.insert(ViewLog(viewLogJson.video, viewLogJson.startTime, viewLogJson.endTime, viewLogJson.created_at))

@@ -31,7 +31,7 @@ class NotesGraph extends React.Component {
   async componentDidMount() {
     const allGraphData = (
       await axios.get(
-        `http://localhost:8080/analytics/generateNoteLogGraphData?video=${this.props.videoId}`
+        `http://localhost:80/analytics/generateNoteLogGraphData?video=${this.props.videoId}`
       )
     ).data;
 
