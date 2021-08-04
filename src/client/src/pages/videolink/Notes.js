@@ -3,7 +3,12 @@ import { CCard, CCardBody, CCardHeader } from "@coreui/react";
 import "./VideoLink.scss";
 import Message from "./Message";
 import axios from "axios";
-import { noteTogetherContract, serverAcountId, web3 } from "../../config";
+import {
+  noteTogetherContract,
+  serverAcountId,
+  web3,
+  apiUrl,
+} from "../../config";
 import processError from "../../util/ErrorUtil";
 
 const Tx = require("ethereumjs-tx").Transaction;
@@ -163,7 +168,7 @@ class Notes extends React.Component {
     };
 
     axios
-      .post("http://localhost:80/analytics/saveNoteLog", note_analytic)
+      .post(`${apiUrl}/analytics/saveNoteLog`, note_analytic)
       .catch((e) => processError(e));
   }
 

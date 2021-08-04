@@ -1,6 +1,7 @@
 import React from "react";
 import HeatMap from "react-heatmap-grid";
 import axios from "axios";
+import { apiUrl } from "../../config";
 
 let store;
 const TICK_CONSTANT = 30;
@@ -22,7 +23,7 @@ class SeekGraph extends React.Component {
   async componentDidMount() {
     const allGraphData = (
       await axios.get(
-        `http://localhost:80/analytics/generateViewLogGraphData?video=${this.props.videoId}`
+        `${apiUrl}/analytics/generateViewLogGraphData?video=${this.props.videoId}`
       )
     ).data;
 

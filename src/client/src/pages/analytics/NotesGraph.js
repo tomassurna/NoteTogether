@@ -1,6 +1,7 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
+import { apiUrl } from "../../config";
 
 let store;
 const TICK_CONSTANT = 5;
@@ -31,7 +32,7 @@ class NotesGraph extends React.Component {
   async componentDidMount() {
     const allGraphData = (
       await axios.get(
-        `http://localhost:80/analytics/generateNoteLogGraphData?video=${this.props.videoId}`
+        `${apiUrl}/analytics/generateNoteLogGraphData?video=${this.props.videoId}`
       )
     ).data;
 
