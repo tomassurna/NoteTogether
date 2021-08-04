@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import "./VideoLink.scss";
 import axios from "axios";
 import processError from "../../util/ErrorUtil";
+import { apiUrl } from "../../config";
 
 let store;
 let view_analytics;
@@ -76,11 +77,9 @@ class Player extends React.Component {
               };
 
               axios
-                .post(
-                  "http://localhost:80/view_analytics/add",
-                  view_analytics,
-                  { headers }
-                )
+                .post(`${apiUrl}/view_analytics/add`, view_analytics, {
+                  headers,
+                })
                 .catch((e) => processError(e));
 
               view_analytics = undefined;
