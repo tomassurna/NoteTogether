@@ -98,7 +98,7 @@
 
 ## Demo video
 
-   https://youtu.be/edE044rYUcI
+   [![Demo Video]](https://youtu.be/edE044rYUcI)
 
 ## Contributors
 
