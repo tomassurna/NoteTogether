@@ -1,12 +1,10 @@
-package com.noteTogether.notetTogether
+package com.noteTogether.noteTogether
 
 import com.mongodb.client.MongoClient
-import com.noteTogether.repositories.NoteLogRepository
 import com.noteTogether.services.AnalyticsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 
 @SpringBootApplication(scanBasePackages = ["com.noteTogether.*"])
