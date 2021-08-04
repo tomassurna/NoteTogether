@@ -1,16 +1,40 @@
-# Capstone
 
-Capstone
+
+
 
 # NoteTogether
 
+   Wentworth Institute of Technology Computer Science Capstone Project
+
 ## Introduction
 
-   ...
+   NoteTogether seeks to bring interactivity to a very crucial aspect of online learning: consuming video media. We developed a hybrid distributed web application that provides    a shared space for watching and annotating video media. Analytics are provided to all users to highlight how users are interacting with a video. NoteTogether utilizes            Ethereum Blockchain to ensure data security and scalability by offloading data storage and processing requirements to the distributed Ethereum network. 
 
 ## Features
 
-   ...
+   - Manage a user account
+    
+      - Use a MetaMask login to record notes and upload media
+         
+   - Manage Media
+   
+      - View media using a corresponding link
+         
+      - Upload media and share links with other users
+         
+   - Manage their notes
+         
+      - Take notes that will be sorted by timestamp as well as view other user’s notes
+   
+      - View notes in both static and dynamic notes depending on the user’s preference
+   
+   - View video usage analytics
+   
+      - Note distribution seperated by tag
+      
+      - Note and viewership heatmap
+
+
 
 ## Getting Started (Ropsten Test Network)
 
@@ -74,8 +98,13 @@ Capstone
 
 ## Demo video
 
-...
+   https://youtu.be/edE044rYUcI
 
 ## Contributors
 
-...
+- Jamie Kerr
+- Tomas Surna
+- Max Rioux
+- Fabio Marcellus
+
+- Advised by Professor Charlie Pham
