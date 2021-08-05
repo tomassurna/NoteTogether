@@ -33,6 +33,10 @@ contract NoteTogether {
     mapping(string => Analytics) analyticsMap; //map of view analytics to video via key
 
     mapping(address => string) usernameMap; //map of user addresses to usernames
+    
+    mapping(address => string[]) interactionMap; //map of users to videos they have uploaded or added a note to
+    
+    
 
     /**
      * @dev creates video metadata storage with an IPFS key and the page link
@@ -41,6 +45,20 @@ contract NoteTogether {
     function addVideo(string memory key, string memory title) public {
         Video memory vid = Video(key, title, msg.sender);
         videoMap[key] = vid;
+        
+        string[] storage vidList = interactionMap[msg.sender];
+        
+        if (vidList.length == 0) {
+            vidList[0] = key;
+        } else {
+            
+            for(uint256 i=0; i < vidList.length; i++) {
+                if (keccak256(abi.encodePacked(vidList[i])) == keccak256(abi.encodePacked(key))) {
+                    return;
+                }
+            }
+            vidList.push(key);
+        }
     }
 
     /**
@@ -67,6 +85,20 @@ contract NoteTogether {
     ) public {
         Note memory note = Note(timestamp, tag, message, user);
         noteMap[key].push(note);
+        
+        string[] storage vidList = interactionMap[msg.sender];
+        
+        if (vidList.length == 0) {
+            vidList[0] = key;
+        } else {
+            
+            for(uint256 i=0; i < vidList.length; i++) {
+                if (keccak256(abi.encodePacked(vidList[i])) == keccak256(abi.encodePacked(key))) {
+                    return;
+                }
+            }
+            vidList.push(key);
+        }
     }
 
     /**
@@ -114,4 +146,12 @@ contract NoteTogether {
     function changeUsername(string memory username) public {
         usernameMap[msg.sender] = username;
     }
+    
+    /**
+     * @dev returns all videos the user has interacted with
+     * 
+     */
+     function getInteractions() public returns (string[] memory) {
+         return interactionMap[msg.sender];
+     }
 }
