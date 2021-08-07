@@ -9,6 +9,7 @@ class TheLayout extends React.Component {
     this.state = {
       isLoginModalOpen: true,
       accountId: "",
+      width100: false,
     };
 
     if (!!window.ethereum) {
@@ -36,6 +37,12 @@ class TheLayout extends React.Component {
     this.setState({ isLoginModalOpen: false });
   }
 
+  width100Callback(width100) {
+    if (this.state.width100 !== width100) {
+      this.setState({ width100 });
+    }
+  }
+
   render() {
     return (
       <div className="c-app c-default-layout">
@@ -44,10 +51,15 @@ class TheLayout extends React.Component {
             // Hack to reconstruct the entire component in order for the account info to be passed in
             key={this.state.isLoginModalOpen ? "1" : "2"}
           />
-          <div className="c-body layout">
+          <div
+            className={
+              this.state.width100 ? "c-body layout-100" : "c-body layout"
+            }
+          >
             {!!window?.ethereum?.selectedAddress && (
               <TheContent
                 // Hack to reconstruct the entire component in order for the account info to be passed in
+                width100Callback={this.width100Callback.bind(this)}
                 key={this.state.isLoginModalOpen ? "3" : "4"}
               />
             )}

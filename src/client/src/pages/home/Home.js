@@ -18,6 +18,7 @@ class Home extends React.Component {
       videoUrl: null,
       videoBuffer: null,
       title: null,
+      loading: false,
     };
   }
 
@@ -36,6 +37,8 @@ class Home extends React.Component {
 
   async upload() {
     let results;
+
+    this.setState({ loading: true });
 
     if (this.state.videoUrl != null) {
       results = await ipfs.add(
@@ -120,6 +123,7 @@ class Home extends React.Component {
                       onChange={(event) =>
                         this.setState({ title: event.target.value })
                       }
+                      disabled={this.state.loading}
                     />
                   </label>
                   <label
@@ -135,6 +139,7 @@ class Home extends React.Component {
                       onChange={(event) =>
                         this.setState({ videoUrl: event.target.value })
                       }
+                      disabled={this.state.loading}
                     />
                   </label>
                   <h3 style={{ fontWeight: 600, marginTop: "4%" }}>OR</h3>
@@ -159,12 +164,13 @@ class Home extends React.Component {
                   color="success"
                   className="height-25-rem btn-lg"
                   disabled={
-                    (!this.state.videoBuffer || !this.state.videoUrl) &&
-                    !this.state.title
+                    ((!this.state.videoBuffer || !this.state.videoUrl) &&
+                      !this.state.title) ||
+                    this.state.loading
                   }
                   onClick={this.upload.bind(this)}
                 >
-                  Upload
+                  {this.state.loading ? "Waiting For Transaction..." : "Upload"}
                 </CButton>
               </div>
             </CCardBody>

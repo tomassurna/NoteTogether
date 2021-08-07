@@ -2,8 +2,8 @@ import Web3 from "web3";
 
 const apiUrl = "https://notetogether.azurewebsites.net";
 const serverAcountId = "0x06C2b3c0174Df5a6006c7A0132203A2715Ec9322";
-const noteTogetherAddress = "0xB3f86E226D26522b0EE764e3687C728848DE9036";
-const projectId = "831be8f97ba94cc69df353bf84a9c574";
+const noteTogetherAddress = "0x0EE96EA4c058a746d628310d0DD71FDD8078cBfB";
+const projectId = "e2634f64bdc749f19aa98dea65d4e289";
 const noteTogetherAbi = [
   {
     constant: false,
@@ -213,6 +213,27 @@ const noteTogetherAbi = [
     ],
     name: "changeUsername",
     outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+    ],
+    name: "getInteractions",
+    outputs: [
+      {
+        internalType: "string[]",
+        name: "",
+        type: "string[]",
+      },
+    ],
     payable: false,
     stateMutability: "nonpayable",
     type: "function",

@@ -5,6 +5,7 @@ import React from "react";
 import { noteTogetherContract, web3 } from "../config";
 import processError from "../util/ErrorUtil";
 import "./Components.scss";
+import NoteTogetherLogo from "../NoteTogetherLogo.png";
 
 class Header extends React.Component {
   constructor(props) {
@@ -49,8 +50,11 @@ class Header extends React.Component {
             className="c-header-brand"
             href="//github.com/tomassurna/NoteTogether"
           >
-            {/* <img src={NoteTogetherLogo} alt="[NoteTogether Logo]" className="logo" /> */}
-            NoteTogether
+            <img
+              src={NoteTogetherLogo}
+              alt="[NoteTogether Logo]"
+              className="logo"
+            />
           </a>
           <span className="c-header-toggler">
             <span className="c-header-toggler-icon" />

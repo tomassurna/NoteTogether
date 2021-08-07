@@ -13,4 +13,21 @@
   .c-callout {
     font-weight: 500;
   }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 90vw;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10vw;
+  }
+
+  .logo-large {
+    height: 20vh;
+  }
 }
