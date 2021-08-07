@@ -72,14 +72,8 @@ class Player extends React.Component {
                 .substr(11, 8);
               view_analytics.created_at = Date();
 
-              const headers = {
-                "Content-Type": "text/plain",
-              };
-
               axios
-                .post(`${apiUrl}/view_analytics/add`, view_analytics, {
-                  headers,
-                })
+                .post(`${apiUrl}/analytics/saveViewLog`, view_analytics)
                 .catch((e) => processError(e));
 
               view_analytics = undefined;

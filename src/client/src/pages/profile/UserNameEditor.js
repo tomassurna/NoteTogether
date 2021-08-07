@@ -37,7 +37,7 @@ class UserNameEditor extends React.Component {
   render() {
     return (
       <>
-        <CCard className="username-section">
+        <CCard id="username-section">
           <CCardHeader>
             <h3 className="display-inline">Change Username</h3>
           </CCardHeader>

@@ -33,6 +33,7 @@ class Content extends React.Component {
                       name={route.name}
                       render={(props) => (
                         <CFade>
+                          {this.props.width100Callback(!!route.width100)}
                           <route.component {...props} />
                         </CFade>
                       )}

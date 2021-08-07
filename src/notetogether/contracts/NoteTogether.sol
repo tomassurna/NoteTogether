@@ -33,12 +33,8 @@ contract NoteTogether {
     mapping(string => Analytics) analyticsMap; //map of view analytics to video via key
 
     mapping(address => string) usernameMap; //map of user addresses to usernames
-    
+
     mapping(address => string[]) interactionMap; //map of users to a list of keys for videos they uploaded, added a note to, or saved
-    
-    
-    
-    
 
     /**
      * @dev creates video metadata storage with an IPFS key and the page link
@@ -47,19 +43,8 @@ contract NoteTogether {
     function addVideo(string memory key, string memory title) public {
         Video memory vid = Video(key, title, msg.sender);
         videoMap[key] = vid;
-    
-        
-        if (interactionMap[msg.sender].length == 0) {
-            interactionMap[msg.sender].push(key);
-        } else {
-            
-            for(uint256 i = 0; i < interactionMap[msg.sender].length; i++) {
-                if (keccak256(abi.encodePacked(interactionMap[msg.sender][i])) == keccak256(abi.encodePacked(key))) {
-                    return;
-                }
-            }
-            interactionMap[msg.sender].push(key);
-        }
+
+        interactionMap[msg.sender].push(key);
     }
 
     /**
@@ -67,7 +52,7 @@ contract NoteTogether {
      * @param link key
      */
     function getVideoData(string memory link)
-        public 
+        public
         returns (Video memory video)
     {
         return videoMap[link];
@@ -86,17 +71,19 @@ contract NoteTogether {
     ) public {
         Note memory note = Note(timestamp, tag, message, user);
         noteMap[key].push(note);
-        
-        if (interactionMap[msg.sender].length == 0) {
-            interactionMap[msg.sender].push(key);
+
+        if (interactionMap[user].length == 0) {
+            interactionMap[user].push(key);
         } else {
-            
-            for(uint256 i = 0; i < interactionMap[msg.sender].length; i++) {
-                if (keccak256(abi.encodePacked(interactionMap[msg.sender][i])) == keccak256(abi.encodePacked(key))) {
+            for (uint256 i = 0; i < interactionMap[user].length; i++) {
+                if (
+                    keccak256(abi.encodePacked(interactionMap[user][i])) ==
+                    keccak256(abi.encodePacked(key))
+                ) {
                     return;
                 }
             }
-            interactionMap[msg.sender].push(key);
+            interactionMap[user].push(key);
         }
     }
 
@@ -109,7 +96,7 @@ contract NoteTogether {
     }
 
     /**
-     * @dev updates analytics with latest data from Compute Engine
+     * @dev updates analytics with latest data from Calc Engine
      * @param link, noteData, viewData
      */
     function updateAnalytics(
@@ -145,16 +132,12 @@ contract NoteTogether {
     function changeUsername(string memory username) public {
         usernameMap[msg.sender] = username;
     }
-    
+
     /**
      * @dev returns all videos the user has interacted with
-     * 
+     *
      */
-    function getInteractions() public returns (string[] memory) {
-         return interactionMap[msg.sender];
-     }
-     
-     /**
-      * @dev adds video key to interactionList
-      */
+    function getInteractions(address user) public returns (string[] memory) {
+        return interactionMap[user];
+    }
 }

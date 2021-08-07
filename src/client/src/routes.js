@@ -14,6 +14,7 @@ const routes = [
     path: "/pages/videolink/:videoId",
     name: "VideoLink",
     component: VideoLink,
+    width100: true,
   },
   { path: "/pages/profile", name: "Profile", component: Profile },
   { path: "/pages/aboutUs", name: "About", component: About },
