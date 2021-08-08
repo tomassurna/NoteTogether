@@ -8,7 +8,7 @@ NoteTogether seeks to bring interactivity to a very crucial aspect of online lea
 
 ## Active Instance:
 
-notetogether.azurewebsites.net/
+https://notetogether.azurewebsites.net/
 
 ## Features
 
