@@ -2,6 +2,8 @@ import Web3 from "web3";
 
 const apiUrl = "https://notetogether.azurewebsites.net";
 const serverAcountId = "0x06C2b3c0174Df5a6006c7A0132203A2715Ec9322";
+const serverAcountPrivateKey =
+  "c1a60fcdca75bcfdfbf3efb2cb07acbd7eca98d49d5525ff9c7e374258475929";
 const noteTogetherAddress = "0x0EE96EA4c058a746d628310d0DD71FDD8078cBfB";
 const projectId = "e2634f64bdc749f19aa98dea65d4e289";
 const noteTogetherAbi = [
@@ -257,4 +259,5 @@ export {
   noteTogetherAddress,
   serverAcountId,
   apiUrl,
+  serverAcountPrivateKey,
 };

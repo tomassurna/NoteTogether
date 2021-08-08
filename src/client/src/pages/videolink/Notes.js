@@ -8,6 +8,7 @@ import {
   serverAcountId,
   web3,
   apiUrl,
+  serverAcountPrivateKey,
 } from "../../config";
 import processError from "../../util/ErrorUtil";
 
@@ -148,12 +149,7 @@ class Notes extends React.Component {
     };
 
     const tx = new Tx(txObject, { chain: "ropsten" });
-    tx.sign(
-      Buffer.from(
-        "c1a60fcdca75bcfdfbf3efb2cb07acbd7eca98d49d5525ff9c7e374258475929",
-        "hex"
-      )
-    );
+    tx.sign(Buffer.from(serverAcountPrivateKey, "hex"));
 
     const serializedTx = tx.serialize();
     const raw = "0x" + serializedTx.toString("hex");
