@@ -1,17 +1,7 @@
-@mixin Inter() {
-  font-family: "Inter";
-}
-
-@mixin Nunito() {
-  font-family: "Nunito";
-}
-
 .about {
   .title {
     margin-bottom: 20px;
-    @include Inter();
-    font-weight: 700;
-    margin-left: 15px;
+    font-weight: bolder;
   }
 
   .description {
@@ -35,14 +25,6 @@
     display: flex;
     flex-direction: column;
     margin-right: 10vw;
-  }
-
-  .description, .feature {
-    @include Nunito();
-  }
-
-  .feature {
-    font-weight: 600;
   }
 
   .logo-large {

@@ -94,18 +94,18 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <div className="home card-container">
-          <CCard style={{minWidth: "255px"}}>
+        <div className="card-container">
+          <CCard style={{ width: "50%" }}>
             <CCardBody>
               <div style={{ textAlign: "center", flexGrow: 1 }}>
-                <h1
-                  className="title display-inline"
-                  style={{ fontSize: "3rem", color: "blue", }}
+                <span
+                  className="display-inline"
+                  style={{ fontSize: "3rem", color: "blue" }}
                 >
-                  Note Together
-                </h1>
+                  NoteTogether
+                </span>
                 <br />
-                <p className="description display-inline">
+                <p className="display-inline">
                   Upload using a Youtube Link or your own Video File! Then add a
                   title!
                 </p>
@@ -177,10 +177,10 @@ class Home extends React.Component {
               </div>
             </CCardBody>
           </CCard>
-          <CCard className="quick-links">
+          <CCard className="quick-links-home">
             <CCardHeader>
-              <div className="quick-links-title">
-                <h3 className="title display-inline">Welcome</h3>
+              <div className="quick-links-title-home">
+                <h3 className="display-inline">Welcome</h3>
               </div>
             </CCardHeader>
             <CCardBody>

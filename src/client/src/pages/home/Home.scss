@@ -30,14 +30,13 @@
   flex-direction: row;
 }
 
-.quick-links {
+.quick-links-home {
   margin-left: 2%;
   align-self: flex-start;
   max-width: 10vw;
-  min-width: 150px;
 }
 
-.quick-links-title {
+.quick-links-title-home {
   color: blue;
   text-align: center;
 }
@@ -124,35 +123,4 @@
     border-radius: 0;
     text-decoration: none;
   }
-}
-
-@mixin Inter() {
-  font-family: "Inter";
-}
-
-@mixin Nunito() {
-  font-family: "Nunito";
-}
-
-.home {
-  
-  .title {
-    @include Inter();
-    font-weight: 700;
-  }
-
-  .description, .label-text, .form-control, .quick-links-title {
-    @include Nunito();
-  }
-
-  .form-control {
-    max-width: 350px;
-  }
-
-  .quick-links {
-    .title {
-      font-weight: 600;
-    }
-  }
-
 }

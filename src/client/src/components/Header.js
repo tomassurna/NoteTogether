@@ -44,10 +44,10 @@ class Header extends React.Component {
     this.getBalance();
 
     return (
-      <CHeader withSubheader className="header">
+      <CHeader withSubheader>
         <CHeaderNav className="px-3 width-100">
           <a
-            className="logo-container c-header-brand"
+            className="c-header-brand"
             href="//github.com/tomassurna/NoteTogether"
           >
             <img
@@ -56,9 +56,9 @@ class Header extends React.Component {
               className="logo"
             />
           </a>
-          {/* <span className="c-header-toggler">
+          <span className="c-header-toggler">
             <span className="c-header-toggler-icon" />
-          </span> */}
+          </span>
           <ul className="c-header-nav mr-auto">
             <li className="c-header-nav-item">
               <a className="c-header-nav-link" href="#/pages/home">
@@ -84,7 +84,7 @@ class Header extends React.Component {
                   : "Guest User"}{" "}
                 -
               </span>
-              <span className="balance">
+              <span>
                 <CIcon content={brandSet.cibEthereum} />
                 {this.state.balance}
               </span>

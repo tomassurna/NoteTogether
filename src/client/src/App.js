@@ -4,8 +4,6 @@ import Alert from "react-s-alert";
 import "../node_modules/react-s-alert/dist/s-alert-css-effects/stackslide.css";
 import "../node_modules/react-s-alert/dist/s-alert-default.css";
 import "./scss/style.scss";
-import "@fontsource/inter";
-import "@fontsource/nunito";
 
 const loading = (
   <div className="pt-3 text-center">

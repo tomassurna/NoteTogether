@@ -13,14 +13,14 @@ class Profile extends React.Component {
             <VideoHistory history={this.props.history} />
           </div>
           <div id="username-editor">
-            <CCard className="quick-links">
+            <CCard className="quick-links-profile">
               <CCardHeader>
-                <div className="quick-links-title">
-                  <h3 className="title display-inline">Welcome</h3>
+                <div className="quick-links-title-profile">
+                  <h3 className="display-inline">Welcome</h3>
                 </div>
               </CCardHeader>
               <CCardBody>
-                <p className="description">
+                <p>
                   Welcome to NoteTogether! NoteTogether is a shared note-taking
                   website for video media. Upload a video or get a video link
                   from a friend and start taking notes together!
