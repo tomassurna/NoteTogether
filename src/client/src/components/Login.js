@@ -19,10 +19,10 @@ class Login extends React.Component {
     return (
       <>
         <Modal isOpen={this.props.isLoginModalOpen}>
-          <div className={"modal-header"}>
-            <h4 style={{ margin: 0 }}>Login ( Ropsten Network )</h4>
+          <div className={"login modal-header"}>
+            <h4 style={{ margin: 0, fontWeight: 700 }}>Login ( Ropsten Network )</h4>
           </div>
-          <div className="modal-body modal-body-btn-right">
+          <div className="login modal-body modal-body-btn-right">
             <p>
               Welcome to NoteTogether! NoteTogether is a shared note-taking
               website for video media. Upload a video or get a video link from a
@@ -36,7 +36,7 @@ class Login extends React.Component {
             {!!window.ethereum ? (
               <button
                 type="button"
-                className="btn btn-primary modal-save-btn"
+                className="login-btn btn btn-primary modal-save-btn"
                 onClick={this.onLoginWithMetaMask.bind(this)}
               >
                 Login Using MetaMask

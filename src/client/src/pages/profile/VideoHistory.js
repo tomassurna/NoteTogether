@@ -49,7 +49,7 @@ class VideoHistory extends React.Component {
         {!this.state.loading && (
           <CCard>
             <CCardHeader>
-              <h3 className="display-inline">Video History</h3>
+              <h3 className="history-title display-inline">Video History</h3>
             </CCardHeader>
             <CCardBody>
               {this.state.videoCards.map((videoData) => {

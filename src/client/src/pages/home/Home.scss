@@ -34,6 +34,7 @@
   margin-left: 2%;
   align-self: flex-start;
   max-width: 10vw;
+  min-width: 150px;
 }
 
 .quick-links-title {
@@ -123,4 +124,35 @@
     border-radius: 0;
     text-decoration: none;
   }
+}
+
+@mixin Inter() {
+  font-family: "Inter";
+}
+
+@mixin Nunito() {
+  font-family: "Nunito";
+}
+
+.home {
+  
+  .title {
+    @include Inter();
+    font-weight: 700;
+  }
+
+  .description, .label-text, .form-control, .quick-links-title {
+    @include Nunito();
+  }
+
+  .form-control {
+    max-width: 350px;
+  }
+
+  .quick-links {
+    .title {
+      font-weight: 600;
+    }
+  }
+
 }

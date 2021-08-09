@@ -28,13 +28,13 @@ function About() {
                 NoteTogether are permanent and secure on blockchain. Users have
                 access to the following features free of charge:
               </h2>
-              <CCallout color="info">Share a video with other users</CCallout>
-              <CCallout color="warning">Add notes to a video</CCallout>
-              <CCallout color="info">View your and others notes</CCallout>
-              <CCallout color="warning">
+              <CCallout className="feature" color="info">Share a video with other users</CCallout>
+              <CCallout className="feature" color="warning">Add notes to a video</CCallout>
+              <CCallout className="feature" color="info">View your and others notes</CCallout>
+              <CCallout className="feature" color="warning">
                 View analytics of note-taking and viewership on a video
               </CCallout>
-              <CCallout color="info">
+              <CCallout className="feature" color="info">
                 View a history of all videos you have posted or added a note to
               </CCallout>
             </div>

@@ -16,11 +16,11 @@ class Profile extends React.Component {
             <CCard className="quick-links">
               <CCardHeader>
                 <div className="quick-links-title">
-                  <h3 className="display-inline">Welcome</h3>
+                  <h3 className="title display-inline">Welcome</h3>
                 </div>
               </CCardHeader>
               <CCardBody>
-                <p>
+                <p className="description">
                   Welcome to NoteTogether! NoteTogether is a shared note-taking
                   website for video media. Upload a video or get a video link
                   from a friend and start taking notes together!
