@@ -208,7 +208,10 @@ class Notes extends React.Component {
             <CCard className="notes-section">
               <CCardBody className="notes-section-body">
                 {this.state.static
-                  ? this.state.messages.map((item, index) => (
+                  ? sortBy(
+                      this.state.messages,
+                      (element) => element.timestampInSeconds
+                    ).map((item, index) => (
                       <Message
                         key={index}
                         name={item.userName}
