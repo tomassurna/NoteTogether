@@ -3,7 +3,7 @@ import Alert from "react-s-alert";
 const processError = (error) => {
   console.debug(error);
 
-  Alert.error(errorMessage, {
+  Alert.error("Error", {
     position: "top-right",
     effect: "stackslide",
     offset: "50",
