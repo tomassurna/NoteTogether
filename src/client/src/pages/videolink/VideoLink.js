@@ -108,9 +108,9 @@ function VideoLink() {
                 className="video-notes"
                 style={showAnalytics ? { display: "none" } : {}}
               >
-                <CCard className="quick-links">
+                <CCard className="quick-links-video">
                   <CCardHeader>
-                    <div className="quick-links-title">
+                    <div className="quick-links-title-video">
                       <h3
                         className="display-inline"
                         style={!showInfo ? { display: "none" } : {}}
@@ -118,7 +118,7 @@ function VideoLink() {
                         Notes Info
                       </h3>
                       <span
-                        className="quick-links-hide-btn"
+                        className="quick-links-hide-btn-video"
                         onClick={() => setShowInfo(!showInfo)}
                       >
                         {showInfo ? "Hide Info" : "Show Info"}

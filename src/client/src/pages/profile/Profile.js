@@ -13,9 +13,9 @@ class Profile extends React.Component {
             <VideoHistory history={this.props.history} />
           </div>
           <div id="username-editor">
-            <CCard className="quick-links">
+            <CCard className="quick-links-profile">
               <CCardHeader>
-                <div className="quick-links-title">
+                <div className="quick-links-title-profile">
                   <h3 className="display-inline">Welcome</h3>
                 </div>
               </CCardHeader>

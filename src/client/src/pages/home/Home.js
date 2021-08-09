@@ -177,9 +177,9 @@ class Home extends React.Component {
               </div>
             </CCardBody>
           </CCard>
-          <CCard className="quick-links">
+          <CCard className="quick-links-home">
             <CCardHeader>
-              <div className="quick-links-title">
+              <div className="quick-links-title-home">
                 <h3 className="display-inline">Welcome</h3>
               </div>
             </CCardHeader>
