@@ -29,7 +29,6 @@ function VideoLink() {
   const [invalidLink, setInvalidLink] = useState(false);
   const [showAnalytics, setShowAnalytics] = useState(false);
 
-  // Time being just assume video links are being used
   useEffect(() => {
     async function getUrlInfo() {
       if (!!videoId) {
