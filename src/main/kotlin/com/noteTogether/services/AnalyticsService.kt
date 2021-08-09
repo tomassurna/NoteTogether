@@ -70,7 +70,7 @@ class AnalyticsService(
             val endTime = LocalTime.parse(it.endTime, DateTimeFormatter.ofPattern("HH:mm:ss"))
             val startSeconds = startTime.toSecondOfDay()
             val endSeconds = endTime.toSecondOfDay()
-            val tag = "Watchage"
+            val tag = "Viewership"
 
             // If midPoint < 15 then we go to the tick below, if its midPoint >= we go to the tick above
             val startMidPoint = startSeconds % TICK_SIZE

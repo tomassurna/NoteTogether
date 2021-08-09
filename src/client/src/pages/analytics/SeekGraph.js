@@ -36,7 +36,7 @@ class SeekGraph extends React.Component {
       const data = [];
 
       for (const label of labels) {
-        data.push(yData[label] || 1);
+        data.push(yData[label] || 0);
       }
 
       datasets[y] = data;
@@ -75,7 +75,7 @@ class SeekGraph extends React.Component {
   }
 
   static yLabels() {
-    return ["Watchage", "Question", "Answer", "Note"];
+    return ["Viewership", "Question", "Answer", "Note"];
   }
 
   render() {
@@ -87,8 +87,8 @@ class SeekGraph extends React.Component {
             <div className={"heatmap"}>
               <HeatMap
                 xLabels={this.state.labels}
-                yLabels={["Watchage"]}
-                data={[this.state.datasets["Watchage"] || []] || []}
+                yLabels={["Viewership"]}
+                data={[this.state.datasets["Viewership"] || []] || []}
                 yLabelWidth={100}
                 xLabelsVisibility={false}
               />

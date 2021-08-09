@@ -26,8 +26,19 @@
 .card-container {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.quick-links {
+  margin-left: 2%;
+  align-self: flex-start;
+  max-width: 10vw;
+}
+
+.quick-links-title {
+  color: blue;
+  text-align: center;
 }
 
 .form-container {

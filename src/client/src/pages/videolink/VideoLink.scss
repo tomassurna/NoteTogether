@@ -67,6 +67,8 @@
 }
 
 .video-notes {
+  display: flex;
+  flex-direction: column;
   margin-left: 1%;
   width: 25%;
   max-width: 400px;
@@ -146,4 +148,26 @@
 
 label + label {
   margin-left: 10px;
+}
+
+.quick-links {
+  align-self: flex-start;
+  width: 100%;
+}
+
+.quick-links-title {
+  color: blue;
+  text-align: center;
+}
+
+.quick-links-hide-btn {
+  color: black;
+  cursor: pointer;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+
+.video-notes-component {
+  flex-grow: 1;
 }
