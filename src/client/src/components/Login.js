@@ -23,6 +23,16 @@ class Login extends React.Component {
             <h4 style={{ margin: 0 }}>Login ( Ropsten Network )</h4>
           </div>
           <div className="modal-body modal-body-btn-right">
+            <p>
+              Welcome to NoteTogether! NoteTogether is a shared note-taking
+              website for video media. Upload a video or get a video link from a
+              friend and start taking notes together!
+            </p>
+            <p>
+              NoteTogether runs on the Ropsten Ethereum Test Network. The
+              Metamask extension is required to log in. Add your Ropsten network
+              wallet to your Metamask account then hit the login button!
+            </p>
             {!!window.ethereum ? (
               <button
                 type="button"
@@ -32,7 +42,12 @@ class Login extends React.Component {
                 Login Using MetaMask
               </button>
             ) : (
-              <span>Please Install MetaMask</span>
+              <p>
+                Please Install MetaMask As A Plugin In Your Browser:{" "}
+                <a className="link" href="https://metamask.io/">
+                  https://metamask.io/
+                </a>
+              </p>
             )}
           </div>
         </Modal>

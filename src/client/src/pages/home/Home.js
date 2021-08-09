@@ -1,4 +1,4 @@
-import { CButton, CCard, CCardBody } from "@coreui/react";
+import { CButton, CCard, CCardBody, CCardHeader } from "@coreui/react";
 import React from "react";
 import { noteTogetherAddress, noteTogetherContract, web3 } from "../../config";
 import "./Home.scss";
@@ -175,6 +175,29 @@ class Home extends React.Component {
                   {this.state.loading ? "Waiting For Transaction..." : "Upload"}
                 </CButton>
               </div>
+            </CCardBody>
+          </CCard>
+          <CCard className="quick-links">
+            <CCardHeader>
+              <div className="quick-links-title">
+                <h3 className="display-inline">Welcome</h3>
+              </div>
+            </CCardHeader>
+            <CCardBody>
+              <p>
+                Welcome to NoteTogether! NoteTogether is a shared note-taking
+                website for video media. Upload a video or get a video link from
+                a friend and start taking notes together!
+              </p>
+              <p>
+                Here, you can upload a video by link or video file. Videos
+                you've added will appear in the Video History section located on
+                your{" "}
+                <a className="link" href="/#/pages/profile">
+                  Profile page
+                </a>
+                .
+              </p>
             </CCardBody>
           </CCard>
         </div>

@@ -28,6 +28,7 @@ function VideoLink() {
   const [loading, setLoading] = useState(true);
   const [invalidLink, setInvalidLink] = useState(false);
   const [showAnalytics, setShowAnalytics] = useState(false);
+  const [showInfo, setShowInfo] = useState(true);
 
   useEffect(() => {
     async function getUrlInfo() {
@@ -103,19 +104,48 @@ function VideoLink() {
                 )}
               </CCard>
 
-              <CCard
+              <div
                 className="video-notes"
                 style={showAnalytics ? { display: "none" } : {}}
               >
-                <CCardBody>
-                  <Notes
-                    videoRef={videoRef}
-                    userName={userName}
-                    videoId={videoId}
-                    store={store}
-                  />
-                </CCardBody>
-              </CCard>
+                <CCard className="quick-links">
+                  <CCardHeader>
+                    <div className="quick-links-title">
+                      <h3
+                        className="display-inline"
+                        style={!showInfo ? { display: "none" } : {}}
+                      >
+                        Notes Info
+                      </h3>
+                      <span
+                        className="quick-links-hide-btn"
+                        onClick={() => setShowInfo(!showInfo)}
+                      >
+                        {showInfo ? "Hide Info" : "Show Info"}
+                      </span>
+                    </div>
+                  </CCardHeader>
+                  <CCardBody style={!showInfo ? { display: "none" } : {}}>
+                    <p>
+                      Take notes below. Annotations will be tied to the video's
+                      current time stamp. Annotations can be tagged as either a
+                      Note, a Question, or an Answer. View notes either all at
+                      once via the static note log or displayed as the video
+                      plays via dynamic note log.
+                    </p>
+                  </CCardBody>
+                </CCard>
+                <CCard className="video-notes-component">
+                  <CCardBody>
+                    <Notes
+                      videoRef={videoRef}
+                      userName={userName}
+                      videoId={videoId}
+                      store={store}
+                    />
+                  </CCardBody>
+                </CCard>
+              </div>
             </div>
           </>
         )}

@@ -12,34 +12,30 @@ function About() {
           <div className="container">
             <div className="info">
               <h2 className="description">
-                NoteTogether is an application that was made to be used to help
-                students and teachers in an online environment simply from using
-                videos. This is especially beneficial due to remote learning
-                that has been in place since the Covid pandemic. The application
-                is simple and easy to understand for any user on any device to
-                use.
+                NoteTogether is a distributed web application designed to bring
+                interactivity to a very crucial aspect of online learning: video
+                media. NoteTogether provides a shared space for watching and
+                annotating video media. Analytics are provided to all users to
+                highlight how users interact with the video media. NoteTogether
+                utilizes Ethereum Blockchain to ensure data security and
+                scalability by offloading data storage and processing
+                requirements to the distributed Ethereum network
               </h2>
               <h2 className="description">
-                The process in using this application is straightforward. A
-                video is uploaded either using a Youtube link or a video file
-                from the user's device which will mostly be the teacher. After
-                choosing a title, the creator and others that the video is
-                shared with are able to utilize several different
-                functionalities such as...
+                What does this mean for the end user? The user incures a small
+                cost when uploading videos and changing their username. However,
+                users can rest assured that videos and notes stored on
+                NoteTogether are permanent and secure on blockchain. Users have
+                access to the following features free of charge:
               </h2>
-              <CCallout color="info">
-                Adding private or public notes tied to a timestamp within the
-                video
-              </CCallout>
+              <CCallout color="info">Share a video with other users</CCallout>
+              <CCallout color="warning">Add notes to a video</CCallout>
+              <CCallout color="info">View your and others notes</CCallout>
               <CCallout color="warning">
-                Viewing notes in dynamic or static mode
+                View analytics of note-taking and viewership on a video
               </CCallout>
               <CCallout color="info">
-                Questions can be asked by students and answered by the teacher
-              </CCallout>
-              <CCallout color="warning">
-                Analytics provided to showing where the most notes are taken and
-                where users rewatch and skip over
+                View a history of all videos you have posted or added a note to
               </CCallout>
             </div>
             <div>
