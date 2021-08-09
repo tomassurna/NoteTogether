@@ -102,7 +102,7 @@ class Home extends React.Component {
                   className="display-inline"
                   style={{ fontSize: "3rem", color: "blue" }}
                 >
-                  Note Together
+                  NoteTogether
                 </span>
                 <br />
                 <p className="display-inline">
