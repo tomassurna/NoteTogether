@@ -41,6 +41,8 @@ class Home extends React.Component {
     this.setState({ loading: true });
 
     if (this.state.videoUrl != null) {
+      // Attach date to the url since IPFS will return a hash of the bytes as the key.
+      // We need the key to always be unique therefore we add "salt" to the value
       results = await ipfs.add(
         Buffer(
           JSON.stringify({

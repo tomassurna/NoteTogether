@@ -91,7 +91,6 @@ class SeekGraph extends React.Component {
                 data={[this.state.datasets["Watchage"] || []] || []}
                 yLabelWidth={100}
                 xLabelsVisibility={false}
-                // squares={true}
               />
             </div>
             <div className={"heatmap"}>
@@ -101,7 +100,6 @@ class SeekGraph extends React.Component {
                 data={[this.state.datasets["Question"] || []] || []}
                 yLabelWidth={100}
                 xLabelsVisibility={true}
-                // squares={true}
               />
             </div>
             <div className={"heatmap"}>
@@ -112,7 +110,6 @@ class SeekGraph extends React.Component {
                 yLabelWidth={100}
                 xLabelWidth={0}
                 xLabelsVisibility={true}
-                // squares={true}
               />
             </div>
             <div className={"heatmap"}>
@@ -122,7 +119,6 @@ class SeekGraph extends React.Component {
                 data={[this.state.datasets["Note"] || []] || []}
                 yLabelWidth={100}
                 xLabelsVisibility={true}
-                // squares={true}
               />
             </div>
           </>

@@ -5,12 +5,12 @@ import Message from "./Message";
 import axios from "axios";
 import {
   noteTogetherContract,
-  serverAcountId,
   web3,
   apiUrl,
   serverAcountPrivateKey,
 } from "../../config";
 import processError from "../../util/ErrorUtil";
+import sortBy from "lodash/sortBy";
 
 const Tx = require("ethereumjs-tx").Transaction;
 
@@ -33,7 +33,10 @@ class Notes extends React.Component {
       loading: true,
     };
 
+    // When redux is updated, recalc the dynamic messages
     store.subscribe(() => this.generateDynamicMessages());
+
+    // HTML refs
     this.textInput = React.createRef();
     this.textButton = React.createRef();
     this.focusTextInput = this.focusTextInput.bind(this);
@@ -47,11 +50,13 @@ class Notes extends React.Component {
     // Loop through all the messages the filter out which ones are past the current timestamp
     const currentPlayerTime = store.getState().time;
     this.setState({
-      dynamicMessages: this.state.messages.filter(
-        (element) => currentPlayerTime >= element.timestampInSeconds
+      dynamicMessages: sortBy(
+        this.state.messages.filter(
+          (element) => currentPlayerTime >= element.timestampInSeconds
+        ),
+        (element) => element.timestampInSeconds
       ),
     });
-    this.scrollToBottom();
   }
 
   focusTextInput() {
@@ -73,6 +78,7 @@ class Notes extends React.Component {
       for (const element of notesData) {
         const userId = element.user;
 
+        // Grab username of the account if not present
         if (!userIdToNameMap[userId]) {
           const userNameData =
             (await noteTogetherContract.methods
@@ -94,15 +100,25 @@ class Notes extends React.Component {
 
       // default to static note state
       this.setState({ messages: data, loading: false, static: true });
-      this.scrollToBottom();
     }
   }
 
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   async messageAdded(e) {
+    const message = document.getElementById("note").value;
+
+    // if message is empty return
+    if (!message) {
+      return;
+    }
+
     const time = new Date(this.state.videoRef.current.getCurrentTime() * 1000)
       .toISOString()
       .substr(11, 8);
-    const message = document.getElementById("note").value;
+
     const tag = this.state.selectedTag;
 
     this.setState({
@@ -119,8 +135,6 @@ class Notes extends React.Component {
       ],
     });
 
-    this.scrollToBottom();
-
     if (!this.state.static) {
       this.generateDynamicMessages();
     }
@@ -128,8 +142,11 @@ class Notes extends React.Component {
     e?.preventDefault();
     document.getElementById("note").value = "";
 
-    const txCount =
-      "0x" + (await web3.eth.getTransactionCount(serverAcountId)).toString(16);
+    const nonce = (
+      await axios.get(`${apiUrl}/web3j/nonce`).catch((e) => processError(e))
+    ).data;
+
+    const txCount = "0x" + nonce.toString(16);
     const txObject = {
       nonce: txCount,
       gasLimit: web3.utils.toHex(6700000),
@@ -154,8 +171,10 @@ class Notes extends React.Component {
     const serializedTx = tx.serialize();
     const raw = "0x" + serializedTx.toString("hex");
 
+    // Save note to contract
     web3.eth.sendSignedTransaction(raw).catch((e) => null);
 
+    // Save note analytic
     const note_analytic = {
       video: this.state.videoId,
       timestamp: time,
@@ -178,24 +197,6 @@ class Notes extends React.Component {
     return +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
   }
 
-  async generateTestData() {
-    for (let i = 0; i < 10; i++) {
-      const duration = store.getState().duration;
-      const time = Math.random() * duration;
-      this.state.videoRef.current.seekTo(time, "seconds");
-
-      const tag = ["Answer", "Question", "Note"][Math.floor(Math.random() * 3)];
-      this.setState({ selectedTag: tag });
-
-      document.getElementById("note").value = Math.random()
-        .toString(36)
-        .substring(7);
-
-      await new Promise((r) => setTimeout(r, 2000));
-      await this.messageAdded();
-    }
-  }
-
   render() {
     return (
       <>
@@ -203,14 +204,6 @@ class Notes extends React.Component {
           <div className="flex-container-column">
             <div style={{ display: "flex" }}>
               <h3>Note Log</h3>
-              {/* For Testing:  */}
-              {/* <CButton
-                style={{ marginLeft: '10px' }}
-                color="info"
-                onClick={() => this.generateTestData()}
-              >
-                Test Data
-              </CButton> */}
             </div>
             <CCard className="notes-section">
               <CCardBody className="notes-section-body">
@@ -271,6 +264,7 @@ class Notes extends React.Component {
                   onClick={() =>
                     this.setState({ ...this.state, selectedTag: "Question" })
                   }
+                  readOnly={true}
                 />{" "}
                 Question
               </label>
@@ -282,6 +276,7 @@ class Notes extends React.Component {
                   onClick={() =>
                     this.setState({ ...this.state, selectedTag: "Note" })
                   }
+                  readOnly={true}
                 />{" "}
                 Note
               </label>
@@ -293,6 +288,7 @@ class Notes extends React.Component {
                   onClick={() =>
                     this.setState({ ...this.state, selectedTag: "Answer" })
                   }
+                  readOnly={true}
                 />{" "}
                 Answer
               </label>
