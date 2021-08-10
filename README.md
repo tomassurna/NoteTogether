@@ -97,7 +97,7 @@ https://notetogether.azurewebsites.net/
 
 ## Demo video
 
-[![Demo Video](https://img.youtube.com/vi/edE044rYUcI/0.jpg)](https://youtu.be/edE044rYUcI)
+[![Demo Video](https://img.youtube.com/vi/edE044rYUcI/0.jpg)](https://youtu.be/UsYNkVGzFZQ)
 
 ## Contributors
 
